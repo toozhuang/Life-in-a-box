@@ -32,9 +32,10 @@
     <button nz-button nzType="primary" nzBlock>登录</button>
   </nz-form-item>
   <nz-form-item>
-    <div nz-col nzSpan="8">
-
+    <div nz-col nzSpan="8" style="    text-align: left">
+      其他登录方式&nbsp;<i class="anticon anticon-google" (click)="login('google')"></i>
     </div>
+    <a href="/auth/google">demo</a>
     <div nz-col nzSpan="8" nzOffset="8" style="    text-align: right">
       <a>注册新账户</a>
     </div>

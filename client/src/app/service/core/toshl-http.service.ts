@@ -10,7 +10,9 @@ import { HttpClient } from "@angular/common/http";
 export class ToshlHttpService {
   constructor(private http: HttpClient) {}
 
-  get(url) {}
+  get(url) {
+    return this.http.get(url);
+  }
   post(body, url) {
     console.log("http service post running");
     return this.http.post(url, body);

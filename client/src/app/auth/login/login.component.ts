@@ -27,6 +27,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  login(type: string) {
+    if (type === "google") {
+      // this.rout
+      this.authService.loginThird().subscribe(value => {
+        console.log(value);
+      });
+    }
+  }
+
   constructor(private authService: AuthService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
