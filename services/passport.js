@@ -39,29 +39,18 @@ passport.use(
     },
     // 下面这个部分是如果通过了strategy之后的操作,
     // 我这个里面的之后的操作是把user传过去
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id })
-        .then(existingUser => {
-          if (existingUser) {
-            console.log(" had a user", existingUser);
-            done(null, existingUser);
-          } else {
-            new User({
-              googleId: profile.id
-            })
-              .save()
-              .then(user => {
-                done(null, user);
-              });
-          }
-          // inform passport that we are done
-          // and resume the auth process
-          // 第一个argument是error.
-          // 第二个是existing Usder
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        console.log(" had a user", existingUser);
+        return done(null, existingUser);
+      }
+      const user = await new User({
+        googleId: profile.id
+      }).save();
+
+      done(null, user);
     }
   )
 );

@@ -14,9 +14,11 @@ module.exports = app => {
       // NOTE;
       // 上面这个通过验证了 并没有过来u, 妈的
       // console.log("suppose to come here a : ", req);
-      res.json({
-        message: "登录成功"
-      });
+      // res.json({
+      //   message: "登录成功"
+      // });
+
+      res.redirect("/");
     }
   );
 

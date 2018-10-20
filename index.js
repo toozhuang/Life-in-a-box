@@ -54,12 +54,12 @@ app.use(passport.session());
 
 authRoutes(app);
 
-app.get("/", (req, res) => {
-  console.log("-----");
-  res.json({
-    hi: "测试一下"
-  });
-});
+// app.get("/", (req, res) => {
+//   console.log("-----");
+//   res.json({
+//     hi: "测试一下"
+//   });
+// });
 
 //  添加auth google 到
 
