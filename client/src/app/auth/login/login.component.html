@@ -1,0 +1,42 @@
+<form style="min-width: 368px !important" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
+        <input type="text" nz-input formControlName="username" placeholder="Username">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">Please input
+        your username!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
+        <input type="password" nz-input formControlName="password" placeholder="Password">
+      </nz-input-group>
+      <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input
+        your Password!</nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item style="    margin-bottom: 12px;">
+    <div nz-col nzSpan="8">
+      <label nz-checkbox formControlName="remember">
+        <span>Remember me</span>
+      </label>
+    </div>
+    <div nz-col nzSpan="8" nzOffset="8">
+      <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
+    </div>
+
+  </nz-form-item>
+  <nz-form-item>
+    <button nz-button nzType="primary" nzBlock>登录</button>
+  </nz-form-item>
+  <nz-form-item>
+    <div nz-col nzSpan="8">
+
+    </div>
+    <div nz-col nzSpan="8" nzOffset="8" style="    text-align: right">
+      <a>注册新账户</a>
+    </div>
+  </nz-form-item>
+</form>
