@@ -34,7 +34,8 @@ passport.use(
     {
       clientID: credential.google_id,
       clientSecret: credential.google_secret,
-      callbackURL: "/auth/google/callback"
+      callbackURL: "/auth/google/callback",
+      proxy: true
     },
     // 下面这个部分是如果通过了strategy之后的操作,
     // 我这个里面的之后的操作是把user传过去
