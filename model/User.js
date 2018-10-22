@@ -8,7 +8,8 @@ const { Schema } = mongoose;
 // 注意这个string是大写的String
 const userSchema = new Schema({
   googleId: String,
-  name: String
+  username: String,
+  password: String
 });
 
 mongoose.model("users", userSchema);

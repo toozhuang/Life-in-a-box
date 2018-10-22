@@ -14,7 +14,7 @@ export class ToshlHttpService {
     return this.http.get(url);
   }
   post(body, url) {
-    console.log("http service post running");
+    console.log("http service post running", url);
     return this.http.post(url, body);
   }
 }

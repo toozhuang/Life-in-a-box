@@ -2,7 +2,9 @@ import { Routes } from "@angular/router";
 
 export const rootRoutes: Routes = [
   // { path: "", redirectTo: "/auth", pathMatch: "full" },
-  { path: "", loadChildren: "./auth/auth.module#AuthModule" }
+  { path: "", loadChildren: "./auth/auth.module#AuthModule" },
+  { path: "core", loadChildren: "./core/core.module#CoreModule" }
+
   // { path: "login", component: LoginComponent },
   // { path: "register", component: RegisterComponent },
   // // 如果登录成功

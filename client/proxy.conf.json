@@ -1,5 +1,14 @@
 {
-  "/auth/google": {
+  "/api/auth/third": {
+    "target": "http://localhost:5000"
+  },
+  "/api/auth/local": {
+    "target": "http://localhost:5000"
+  },
+  "/api/auth/error": {
+    "target": "http://localhost:5000"
+  },
+  "/api/auth/register": {
     "target": "http://localhost:5000"
   }
 }
