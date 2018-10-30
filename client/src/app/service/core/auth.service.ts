@@ -4,12 +4,18 @@ import { ToshlHttpService } from "./toshl-http.service";
 
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
+import { StatusCheckInterface } from "../interface/status.interface";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
   constructor(private route: Router, private coreService: ToshlHttpService) {}
+
+
+  logout(){
+    return this.coreService.get('api/auth/logout')
+  }
 
   login(body) {
     return this.coreService.post(body, "/api/auth/local").pipe(
@@ -32,6 +38,26 @@ export class AuthService {
       },
       `/api/auth/third`
     );
+  }
+
+  checkEmail(email: string) {
+    return this.coreService.get(`/api/auth/check/${email}`).pipe(
+      map((value: StatusCheckInterface) => {
+        return value.status;
+      })
+    );
+  }
+
+  loginStatus() {
+    return this.coreService.get("/api/auth/current_user").pipe(
+      map((value: any) => {
+        return value.status;
+      })
+    );
+  }
+
+  register(userObj: any) {
+    return this.coreService.post(userObj, "/api/auth/register");
   }
 
   // + "auth/google"

@@ -4,25 +4,25 @@ import { Routes, RouterModule } from "@angular/router";
 import { AuthComponent } from "./auth/auth.component";
 import { SharedModule } from "../shared/shared.module";
 import { LoginComponent } from "./login/login.component";
+import { RegisterComponent } from "./register/register.component";
 
 const authRoute: Routes = [
+  // {
+  //   path: "",
+  //   redirectTo: "auth",
+  //   pathMatch: "full"
+  // },
   {
     path: "",
-    redirectTo: "auth",
-    pathMatch: "full"
-  },
-  {
-    path: "auth",
     component: AuthComponent,
     children: [
       {
         path: "",
-        redirectTo: "login",
-        pathMatch: "full"
+        component: LoginComponent
       },
       {
-        path: "login",
-        component: LoginComponent
+        path: "register",
+        component: RegisterComponent
       }
     ]
   }
@@ -30,6 +30,6 @@ const authRoute: Routes = [
 
 @NgModule({
   imports: [CommonModule, SharedModule, RouterModule.forChild(authRoute)],
-  declarations: [AuthComponent, LoginComponent]
+  declarations: [AuthComponent, LoginComponent, RegisterComponent]
 })
 export class AuthModule {}

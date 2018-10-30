@@ -10,6 +10,8 @@ import { registerLocaleData } from "@angular/common";
 import zh from "@angular/common/locales/zh";
 import { RouterModule } from "@angular/router";
 import { rootRoutes } from "./root-routing";
+import { FormsModule } from '@angular/forms';
+import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
 registerLocaleData(zh);
 
@@ -21,9 +23,13 @@ registerLocaleData(zh);
     HttpClientModule,
 
     RouterModule.forRoot(rootRoutes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgZorroAntdModule
   ],
 
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
+  providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
 export class AppModule {}

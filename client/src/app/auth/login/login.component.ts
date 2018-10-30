@@ -5,6 +5,9 @@ import { AuthService } from "src/app/service/core/auth.service";
 // third
 import * as Cookies from "js-cookie";
 import { Router } from "@angular/router";
+import { StatusCheckInterface } from "src/app/service/interface/status.interface";
+import { NzMessageService } from "ng-zorro-antd";
+
 declare const gapi: any;
 
 @Component({
@@ -25,17 +28,28 @@ export class LoginComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
 
-    console.log(" worked", this.validateForm.value);
-    this.authService.login(this.validateForm.value).subscribe((value: any) => {
-      console.log(" login in : ", value);
-      if (value.status === 200) {
-        // 添加type cookie, 虽然也没什么用, 毕竟存储的是id 为什么还要添加呢?  煞笔把
-        // Cookies.set("type", value.type, { expires: 30 });
-      }
-    });
+    // console.log(" worked", this.validateForm.value);
+    this.authService
+      .login(this.validateForm.value)
+      .subscribe((value: StatusCheckInterface) => {
+        console.log(" anything com here ? ", value);
+        if (value.status) {
+          // login success
+          this.route.navigateByUrl("/core/money/dashboard");
+        } else {
+          console.log(value);
+          this.message.remove();
+          this.createMessage("error", value.message);
+        }
+      });
+  }
+
+  createMessage(type: string, message: string): void {
+    this.message.create(type, message);
   }
 
   constructor(
+    private message: NzMessageService,
     private route: Router,
     private authService: AuthService,
     private fb: FormBuilder
@@ -43,13 +57,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
+      email: [null, [Validators.required]],
       password: [null, [Validators.required]],
       remember: [true]
     });
   }
 
-  // google login stuff
+  //TODO: google login stuff
   public auth2: any;
   public googleInit() {
     gapi.load("auth2", () => {
@@ -77,6 +91,7 @@ export class LoginComponent implements OnInit {
         // this.route.navigateByUrl("/core");
         this.authService.loginThird(profile.getId()).subscribe(value => {
           console.log(value);
+          // 判断登录是否成功
         });
       },
       error => {

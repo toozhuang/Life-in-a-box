@@ -1,3 +1,66 @@
-<p>
-  core works!
-</p>
+<nz-layout style="height:100%">
+  <nz-sider nzCollapsible (nzCollapsedChange)="test($event)" [(nzCollapsed)]="isCollapsed" [nzWidth]="width"
+    [nzReverseArrow]="isReverseArrow" [nzTrigger]="triggerTemplate">
+    <div class="logo">
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+      <ng-container *ngFor="let item of menuList">
+        <ng-container *ngIf="item.subMenu;else normalItemView">
+          <li nz-submenu>
+            <span title>
+              <i nz-icon [type]="item.style" theme="outline"></i>
+              <span *ngIf="!isCollapsed">{{item.name}}</span>
+
+            </span>
+            <ul>
+              <ng-container *ngFor="let subItem of item.subMenu">
+                <li nz-menu-item [routerLink]="subItem.routerlink">
+                  {{subItem.name}}
+                </li>
+              </ng-container>
+            </ul>
+          </li>
+        </ng-container>
+        <ng-template #normalItemView>
+          <li nz-menu-item>
+            <span title>
+              <i nz-icon [type]="item.style" theme="outline"></i>
+
+              <span *ngIf="!isCollapsed">{{item.name}}</span>
+            </span>
+          </li>
+        </ng-template>
+
+      </ng-container>
+
+      <li nz-menu-item style="bottom: .5rem;
+      position: absolute;" (click)="showConfirm()()">
+        <span title>
+          <i nz-icon type="logout" theme="outline"></i>
+          <span *ngIf="!isCollapsed">logout</span>
+        </span>
+      </li>
+
+
+    </ul>
+
+
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;">
+      <i style="font-size: 1.2rem;cursor: pointer;margin-left: 1rem;" nz-icon [type]="isCollapsed?'menu-unfold':'menu-fold'"
+        theme="outline" (click)="collapseTrigger()"></i></nz-header>
+    <nz-content style="margin:0 16px;overflow: auto; overflow-x: hidden;">
+      <nz-breadcrumb style="margin:16px 0;">
+        <nz-breadcrumb-item>Money Collection</nz-breadcrumb-item>
+        <nz-breadcrumb-item></nz-breadcrumb-item>
+        <nz-breadcrumb-item>History</nz-breadcrumb-item>
+      </nz-breadcrumb>
+      <div style="padding:24px; background: #fff; min-height: 360px;">
+        <router-outlet></router-outlet>
+
+      </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">Ant Design ©2017 Implement By Angular</nz-footer>
+  </nz-layout>
+</nz-layout>

@@ -11,9 +11,15 @@ const passport = require("passport");
 //load 其他的js文件
 
 require("./model/User");
+require("./model/Cost");
+require("./model/Category");
+require("./model/Todo");
 require("./services/passport");
 
+// route的集合
 const authRoutes = require("./routes/authRoute");
+const moneyRoutes = require("./routes/moneyRoute");
+const todoRoute = require("./routes/todoRoute");
 
 mongoose.connect(
   credential.mongodb,
@@ -52,7 +58,10 @@ app.use(passport.initialize());
 // 这个就是告诉passport 来用前段传过来的cookies
 app.use(passport.session());
 
+//load different route handler
 authRoutes(app);
+moneyRoutes(app);
+todoRoute(app);
 
 // app.get("/", (req, res) => {
 //   console.log("-----");

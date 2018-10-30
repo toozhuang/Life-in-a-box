@@ -3,10 +3,24 @@ import { CommonModule } from "@angular/common";
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from "ng-zorro-antd";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
+// third
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgZorroAntdModule],
+  imports: [
+    CommonModule,
+    NgxChartsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgZorroAntdModule
+  ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   declarations: [],
-  exports: [FormsModule, ReactiveFormsModule, NgZorroAntdModule]
+  exports: [
+    FormsModule,
+    NgxChartsModule,
+    ReactiveFormsModule,
+    NgZorroAntdModule
+  ]
 })
 export class SharedModule {}

@@ -5,7 +5,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const credential = require("../config/keys");
 
 const mongoose = require("mongoose");
-const User = mongoose.model("users");
+const User = mongoose.model("user");
 
 //下面这个两个地方才是保存的使用的地方,
 // 为什么我serializeUser用来serializeUser的id
@@ -15,21 +15,24 @@ const User = mongoose.model("users");
 // 来加密这个userid 就是下面这个done要做的事情
 passport.serializeUser((user, done) => {
   // debugger;
-  console.log(" 所以什么时候会进行这个地方来? ", user);
+  console.log(" serializeUser? ", user);
   // 下面这个done会存储到 session里面去
   // 所以要尽量的小
   // 然后后面的deserializeUser解析的时候再直接读取
-  done(null, user.id);
+  if (user) {
+    done(null, user.id);
+  } else {
+    done(null, false);
+  }
 });
 
 //后面所有的操作都到这里来先
 // 相当于 passport是一个midlware了
 passport.deserializeUser((obj, done) => {
-  console.log("来没来啊 卧槽 ", obj);
+  console.log("deserializeUser 卧槽 ", obj);
   // 把这个id 要存储到cookies里面去
   User.findById(obj)
     .then(user => {
-      console.log(" zhege diaobudiao ?", user);
       done(null, user);
     })
     .catch(err => {
@@ -44,15 +47,16 @@ passport.use(
   // 哪怕传过来的是 '' 也不定 一定要有值
   new LocalStrategy(
     {
-      usernameField: "username",
+      usernameField: "email",
       passwordField: "password",
       passReqToCallback: true
       // session: false
     },
-    (req, username, password, done) => {
+    (req, email, password, done) => {
       // 每次到这里来的时候, 都要先logout一下
       req.logout();
-      console.log("这个是正常的login时候的状态", req.body);
+      // console.log("这个是正常的login时候的状态", req.body);
+      // third:
       if (req.body.type) {
         console.log(req.body);
         let obj = {};
@@ -70,24 +74,25 @@ passport.use(
           }
         });
       } else {
-        User.findOne({ username: username })
+        // local check
+        console.log('local check', req.body, email, password,{ email: email })
+        User.findOne({ email: email })
           .then(user => {
             console.log("查找到user: ", user);
             if (!user) {
               // 即用户不存在
-              return done(null, false);
+              return done(null, false, { message: "no user found" });
             }
 
-            if (user.password !== password) {
-              return done(null, false);
+            if (user && user.password !== password) {
+              return done(null, false, { message: "password is not right" });
             }
 
-            // 这个时候我是把user的所有信息都放到了内存里面了,
-            // 然后后面查询的时候 就是用这个
+            // 登录成功
             return done(null, user);
           })
           .catch(err => {
-            return done(err);
+            return done(err, false);
           });
       }
       // console.log("anthing come here: ",req, username, password);

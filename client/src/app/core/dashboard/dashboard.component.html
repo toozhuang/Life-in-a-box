@@ -1,0 +1,62 @@
+<div class="top">
+
+  <div nz-row>
+    <div nz-col nz-row nzXs="24" nzSm="24" nzMd="24" nzLg="8" nzXl="4" class="description">
+      <div nz-col>
+        <label for="costofDay">本日收入</label>
+        <span id="costofDay">{{currency}}0.00</span>
+      </div>
+      <div nz-col>
+        <label for="costofMonth">本月收入</label>
+        <span id="costofMonth">{{currency}}0.00</span>
+      </div>
+      <div nz-col>
+        <label for="costofYear">当年支出</label>
+        <span id="costofYear">{{currency}}0.00</span>
+      </div>
+
+    </div>
+    <div nz-col nz-row nzXs="24" nzSm="24" nzMd="24" nzLg="16" nzXl="20" class="chart">
+      <ngx-charts-bar-vertical [scheme]="colorScheme" [view]="viewLine" [results]="single" [gradient]="gradient"
+        [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+    </div>
+  </div>
+  <nz-divider></nz-divider>
+  <div nz-row>
+    <div nz-col nz-row nzXl="4">
+      <label class="title">
+        本月支出
+      </label>
+    </div>
+    <div nz-col nz-row nzXl="20">
+      <div nz-col nzXl="12">
+        <ngx-charts-pie-chart [scheme]="colorScheme" [view]="view" [results]="gdp" [legend]="false" [explodeSlices]="explodeSlices"
+          [labels]="false" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+        </ngx-charts-pie-chart>
+      </div>
+      <div nz-col nzXl="12">
+        <ngx-charts-pie-chart [scheme]="colorScheme" [view]="view" [results]="single" [legend]="false" [explodeSlices]="explodeSlices"
+          [labels]="false" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+  </div>
+  <nz-divider></nz-divider>
+  <div nz-row>
+    <div nz-col nz-row nzXl="4">
+      <label for="">
+        本月预算
+      </label>
+    </div>
+    <div nz-col nz-row nzXl="20">
+      <!-- [view]="view" -->
+      <ngx-charts-bar-vertical-stacked [scheme]="colorScheme" [results]="multi" [gradient]="gradient" [xAxis]="showXAxis"
+        [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+      </ngx-charts-bar-vertical-stacked>
+    </div>
+  </div>
+
+</div>

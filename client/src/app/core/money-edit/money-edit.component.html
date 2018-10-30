@@ -1,0 +1,99 @@
+<div *ngIf="costForm">
+  <form nz-form [formGroup]='costForm' (ngSubmit)="save()">
+    <!-- 最外面是一个row -->
+    <div nz-row nzGutter="10">
+      <div nz-col nzSpan="4">
+        <!--  让这个imag的宽度和父亲的一样寛 -->
+        <img style="width: 70%;" src="https://www.wacai.com/images/inside/attachment_default.png" alt="">
+      </div>
+      <div nz-col nz-row nzSpan="18">
+        <div nz-row>
+          <div nz-col nzSpan="14">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="5" nzFor="cost">Cost</nz-form-label>
+              <nz-form-control [nzSpan]="17">
+                <input nz-input name="cost" type="cost" id="cost" formControlName='cost'>
+                <nz-form-explain *ngIf="costForm.get('cost').dirty && costForm.get('cost').errors">Please
+                  input the cost!</nz-form-explain>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="14">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="5" nzFor="category">Category</nz-form-label>
+              <nz-form-control [nzSpan]="17">
+                <!-- <input nz-input name="category" type="category" id="category" formControlName='category'> -->
+                <nz-select name="category" style="width: 120px;" formControlName='category' (ngModelChange)="resetSubCategorylist($event)">
+                  <nz-option *ngFor="let p of categoryList" [nzValue]="p.category" [nzLabel]="p.category"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="10">
+            <nz-form-item>
+              <nz-form-control [nzSpan]="16">
+                <!-- <input nz-input name="subCategory" type="subCategory" id="subCategory" formControlName='subCategory'> -->
+                <nz-select name="subCategory" style="width: 100%;" formControlName='subCategory' (ngModelChange)="provinceChange($event)">
+                  <nz-option *ngFor="let p of subCategoryList" [nzValue]="p" [nzLabel]="p"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="14">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="5" nzFor="date">date</nz-form-label>
+              <nz-form-control [nzSpan]="17">
+                <!--   (ngModelChange)="onChange($event)" (nzOnOk)="onOk($event)" dsiable event, use formcontrolname instead -->
+                <nz-date-picker nzShowTime nzFormat="yyyy-MM-dd HH:mm:ss" name="costDate" id="date" formControlName='costDate'></nz-date-picker>
+
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="10">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="9" nzFor="accountbook">account book</nz-form-label>
+              <nz-form-control [nzSpan]="15">
+                <input  nz-input name="accountbook" type="accountbook" id="accountbook" formControlName='accountBook'>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row>
+          <div nz-col nzSpan="14">
+            <nz-form-item>
+              <nz-form-label [nzSpan]="5" nzFor="note">Note</nz-form-label>
+              <nz-form-control [nzSpan]="18">
+
+                <textarea rows="4" nz-input formControlName='note'></textarea>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+        </div>
+        <div nz-row nzGutter="10">
+          <div nz-col nzSpan="6">
+            <nz-form-item>
+              <nz-form-control>
+                <button nz-button type="submit" nzType="primary" nzBlock>Save</button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div nz-col nzSpan="6">
+            <nz-form-item>
+              <nz-form-control>
+                <button nz-button type="button" nzType="danger" nzBlock>Delete</button>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </form>
+</div>

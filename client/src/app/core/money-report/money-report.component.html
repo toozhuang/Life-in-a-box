@@ -1,0 +1,33 @@
+<nz-table #nzTable [nzLoading]="loading" [nzData]="dataSet" [nzPageSize]="15">
+  <thead>
+    <tr>
+      <th nzShowExpand></th>
+      <th>时间</th>
+      <th>金额</th>
+      <th>类别</th>
+      <th>备注</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+    <ng-template ngFor let-data [ngForOf]="nzTable.data">
+      <tr (click)="expandControl(data)" [ngClass]="{'toggle-tr': data.expand}" style="cursor:pointer">
+        <!-- nzShowExpand [(nzExpand)]="data.expand" -->
+        <td nzShowExpand [nzExpand]="data.expand"></td>
+        <td>{{data.costDate}}</td>
+        <td>{{data.cost}}</td>
+        <td>{{data.category}} - {{data.subCategory}}</td>
+        <td>{{data.note}}</td>
+
+      </tr>
+      <tr [nzExpand]="data.expand">
+        <td></td>
+        <td colspan="4">
+          <!-- 这个地方是一个表格, 我就叫做control component之类的?  -->
+          <app-money-edit *ngIf="data.expand" (toggleEvent)="updateData($event)" [categoryList]='categoryList' [cost]="data"></app-money-edit>
+        </td>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>

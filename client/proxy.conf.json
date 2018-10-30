@@ -1,8 +1,17 @@
 {
-  "/api/auth/third": {
+  "/api/todo/*": {
+    "target": "http://localhost:5000"
+  },
+  "/api/auth/*": {
+    "target": "http://localhost:5000"
+  },
+  "/api/money/*": {
     "target": "http://localhost:5000"
   },
   "/api/auth/local": {
+    "target": "http://localhost:5000"
+  },
+  "/api/auth/check/*": {
     "target": "http://localhost:5000"
   },
   "/api/auth/error": {
