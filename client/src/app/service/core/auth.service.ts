@@ -1,20 +1,20 @@
 import { Injectable } from "@angular/core";
-import { ToshlHttpService } from "./toshl-http.service";
+
 // import { baseURL } from "src/environments/environment";
 
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { StatusCheckInterface } from "../interface/status.interface";
+import { LifeHttpService } from "./life-http.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private route: Router, private coreService: ToshlHttpService) {}
+  constructor(private route: Router, private coreService: LifeHttpService) {}
 
-
-  logout(){
-    return this.coreService.get('api/auth/logout')
+  logout() {
+    return this.coreService.get("api/auth/logout");
   }
 
   login(body) {

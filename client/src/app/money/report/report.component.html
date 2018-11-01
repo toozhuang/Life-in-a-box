@@ -1,0 +1,22 @@
+<nz-tabset [nzSelectedIndex]='1'>
+  <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+    <ng-template #titleTemplate>
+      <!-- <i nz-icon [type]="tab.icon"></i> -->
+      {{ tab.name }}
+    </ng-template>
+    <ng-container [ngSwitch]="tab.type">
+      <p *ngSwitchCase="0">
+        Coming soon
+      </p>
+      <p *ngSwitchCase="1">
+        <app-cost-report></app-cost-report>
+      </p>
+      <p *ngSwitchCase="2">
+        Coming soon
+      </p>
+      <p *ngSwitchDefault>
+
+      </p>
+    </ng-container>
+  </nz-tab>
+</nz-tabset>

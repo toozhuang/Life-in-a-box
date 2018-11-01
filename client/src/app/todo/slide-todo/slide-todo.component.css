@@ -1,0 +1,15 @@
+.custom-list {
+  margin-top: 1.5rem;
+  height: 100%;
+  margin-left: -24px;
+  margin-right: -24px;
+  border-radius: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
+.custom-footer {
+  position: absolute;
+  bottom: 0;
+  display: block;
+}

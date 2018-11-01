@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ToshlHttpService } from "../core/toshl-http.service";
+import { LifeHttpService } from "../core/life-http.service";
 import { API } from "src/app/dataset/api.list";
 import { map } from "rxjs/operators";
 
@@ -7,7 +7,7 @@ import { map } from "rxjs/operators";
   providedIn: "root"
 })
 export class CostService {
-  constructor(private httpService: ToshlHttpService) {}
+  constructor(private httpService: LifeHttpService) {}
 
   /**
    * return all the cost list

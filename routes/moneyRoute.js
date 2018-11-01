@@ -23,7 +23,7 @@ module.exports = app => {
       // console.log(req.user.id);
       const options = { sort: { costDate: 1 } };
       Cost.find({ userId: req.user.id })
-        .sort({ costDate: - 1 })
+        .sort({ costDate: -1 })
         .then(results => {
           // filter the date type
           results.forEach(item => {
@@ -90,9 +90,13 @@ module.exports = app => {
           result.costDate = moment().unix(req.body.costDate);
           result.save().then(result => {
             // console.log("save ?");
+            result.costDate = moment
+            .unix(result.costDate)
+            .format("MM-DD-YYYY HH:mm");
             res.json({
               status: 200,
-              message: "保存成功"
+              message: "保存成功",
+              cost: result
             });
           });
         });

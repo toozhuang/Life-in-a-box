@@ -74,6 +74,7 @@ export const menu: Array<Menu> = [
     style: "hourglass",
     subMenu: [
       {
+        // default to inbox
         name: "Inbox",
         routerlink: "/core/todo/inbox"
       },
@@ -82,7 +83,8 @@ export const menu: Array<Menu> = [
       },
       // done use timeline page
       {
-        name: "Done"
+        name: "Done",
+        routerlink: "/core/todo/archieve"
       }
     ]
   },

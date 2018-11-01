@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
         console.log(" anything com here ? ", value);
         if (value.status) {
           // login success
-          this.route.navigateByUrl("/core/money/dashboard");
+          this.route.navigateByUrl("/core");
         } else {
           console.log(value);
           this.message.remove();

@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 @Injectable({
   providedIn: "root"
 })
-export class ToshlHttpService {
+export class LifeHttpService {
   constructor(private http: HttpClient) {}
 
   get(url) {

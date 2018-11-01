@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-money-add",
-  templateUrl: "./money-add.component.html",
-  styleUrls: ["./money-add.component.css"]
+  selector: "app-record-money",
+  templateUrl: "./record-money.component.html",
+  styleUrls: ["./record-money.component.css"]
 })
-export class MoneyAddComponent implements OnInit {
+export class RecordMoneyComponent implements OnInit {
   // <i nz-icon type="right" theme="outline"></i>
   // <i nz-icon type="frown" theme="outline"></i>
   // <i nz-icon type="smile" theme="outline"></i>

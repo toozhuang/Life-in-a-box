@@ -6,17 +6,22 @@ import {
   EventEmitter,
   Output
 } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, FormControl } from "@angular/forms";
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl
+} from "@angular/forms";
 import { CostService } from "src/app/service/money/cost.service";
 
 import { NzNotificationService } from "ng-zorro-antd";
 
 @Component({
-  selector: "app-money-edit",
-  templateUrl: "./money-edit.component.html",
-  styleUrls: ["./money-edit.component.css"]
+  selector: "app-edit-report",
+  templateUrl: "./edit-report.component.html",
+  styleUrls: ["./edit-report.component.css"]
 })
-export class MoneyEditComponent implements OnInit, OnDestroy {
+export class EditReportComponent implements OnInit, OnDestroy {
   @Input()
   categoryList: any[];
 
@@ -67,13 +72,13 @@ export class MoneyEditComponent implements OnInit, OnDestroy {
         ...this.cost,
         ...this.costForm.value
       })
-      .subscribe(result => {
+      .subscribe((result: any) => {
         this.cost = {
           ...this.cost,
           ...this.costForm.value
         };
         console.log(this.cost);
-        this.toggleEvent.emit(this.cost);
+        this.toggleEvent.emit(result.cost);
         this.notification.create("success", "更新成功", "数据更新成功.", {
           nzDuration: 1000
         });

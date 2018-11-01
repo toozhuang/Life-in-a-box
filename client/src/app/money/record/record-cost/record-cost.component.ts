@@ -7,11 +7,11 @@ import { NzNotificationService } from "ng-zorro-antd";
 import { forkJoin } from "rxjs";
 
 @Component({
-  selector: "app-money-cost",
-  templateUrl: "./money-cost.component.html",
-  styleUrls: ["./money-cost.component.css"]
+  selector: "app-record-cost",
+  templateUrl: "./record-cost.component.html",
+  styleUrls: ["./record-cost.component.css"]
 })
-export class MoneyCostComponent implements OnInit {
+export class RecordCostComponent implements OnInit {
   costForm: FormGroup;
 
   accountBookList: any[] = [];

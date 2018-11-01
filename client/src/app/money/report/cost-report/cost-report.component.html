@@ -1,4 +1,4 @@
-<nz-table #nzTable [nzLoading]="loading" [nzData]="dataSet" [nzPageSize]="15">
+<nz-table #nzTable nzShowPagination="true" [nzLoading]="loading" [nzData]="dataSet" [nzPageSize]="15">
   <thead>
     <tr>
       <th nzShowExpand></th>
@@ -13,7 +13,7 @@
 
     <ng-template ngFor let-data [ngForOf]="nzTable.data">
       <tr (click)="expandControl(data)" [ngClass]="{'toggle-tr': data.expand}" style="cursor:pointer">
-        <!-- nzShowExpand [(nzExpand)]="data.expand" -->
+
         <td nzShowExpand [nzExpand]="data.expand"></td>
         <td>{{data.costDate}}</td>
         <td>{{data.cost}}</td>
@@ -24,8 +24,8 @@
       <tr [nzExpand]="data.expand">
         <td></td>
         <td colspan="4">
-          <!-- 这个地方是一个表格, 我就叫做control component之类的?  -->
-          <app-money-edit *ngIf="data.expand" (toggleEvent)="updateData($event)" [categoryList]='categoryList' [cost]="data"></app-money-edit>
+
+          <app-edit-report *ngIf="data.expand" (toggleEvent)="updateData($event)" [categoryList]='categoryList' [cost]="data"></app-edit-report>
         </td>
       </tr>
     </ng-template>

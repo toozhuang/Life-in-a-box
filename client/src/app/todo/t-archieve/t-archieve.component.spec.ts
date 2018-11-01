@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MoneyIncomeComponent } from './money-income.component';
+import { TArchieveComponent } from './t-archieve.component';
 
-describe('MoneyIncomeComponent', () => {
-  let component: MoneyIncomeComponent;
-  let fixture: ComponentFixture<MoneyIncomeComponent>;
+describe('TArchieveComponent', () => {
+  let component: TArchieveComponent;
+  let fixture: ComponentFixture<TArchieveComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MoneyIncomeComponent ]
+      declarations: [ TArchieveComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MoneyIncomeComponent);
+    fixture = TestBed.createComponent(TArchieveComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

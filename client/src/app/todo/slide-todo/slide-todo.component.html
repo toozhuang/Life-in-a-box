@@ -1,0 +1,62 @@
+<!-- <input type="text" [(ngModel)]="todoTask.title">
+<button (click)="save()">save</button> -->
+
+
+<!-- 这是一个抽屉 -->
+
+<nz-list class="custom-list" nzBordered nzSize="large" [nzHeader]="slideHeader" [nzFooter]="slideFooter">
+  <nz-list-item>
+    <div nz-row [nzAlign]="'middle'" [nzType]="'flex'" [nzGutter]="20" style="width: 100%">
+      <div nz-col nzSpan="2"><i nz-icon type="calendar" theme="outline"></i></div>
+      <div nz-col nzSpan="19">
+        <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+      </div>
+    </div>
+  </nz-list-item>
+  <!-- below is dynamic length of sub todos -->
+  <nz-list-item>
+    <div nz-row [nzAlign]="'middle'" [nzType]="'flex'" [nzGutter]="20" style="width: 100%">
+      <div nz-col nzSpan="2"> <label nz-checkbox [(ngModel)]="checked" (ngModelChange)="toggleTodo($event)"></label></div>
+      <div nz-col nzSpan="19">
+        <textarea nz-input placeholder="Input your subtodo" nzAutosize></textarea>
+      </div>
+      <!-- add a table here -->
+    </div>
+  </nz-list-item>
+  <nz-list-item>
+    <div nz-row [nzAlign]="'top'" [nzType]="'flex'" [nzGutter]="20" style="width: 100%">
+      <div nz-col nzSpan="2"><i nz-icon type="form" theme="outline"></i></div>
+      <div nz-col nzSpan="19">
+        <textarea nz-input placeholder="Notes" [(ngModel)]="localTodoItem.note" [nzAutosize]="{ minRows: 3, maxRows: 6 }"></textarea>
+      </div>
+      <div nz-col nzSpan="2"><i nz-icon type="arrows-alt" theme="outline"></i></div>
+
+
+      <!-- add a table here -->
+    </div>
+
+  </nz-list-item>
+</nz-list>
+
+<ng-template #slideHeader>
+  <!--这个地方是个单独的header 只要修改 就和后端沟通 每一个操作都会触发 后端的沟通 -->
+  <div nz-row [nzAlign]="'middle'" [nzType]="'flex'">
+    <div nz-col nzSpan="2"> <label nz-checkbox [(ngModel)]="localTodoItem.status" (ngModelChange)="toggleTodo($event)"></label></div>
+    <div nz-col nzSpan="18">
+      <!-- (blur)="toggleTodo()" -->
+      <textarea style="border:none" name="title" #title [(ngModel)]="localTodoItem.title" (keyup.enter)="toggleTodo()"
+         nz-input placeholder="large size" nzAutosize></textarea>
+    </div>
+    <!-- add a table here -->
+  </div>
+
+
+
+</ng-template>
+
+<ng-template #slideFooter>
+  <div class="custom-footer">
+    <h4> this is a footer</h4>
+
+  </div>
+</ng-template>
