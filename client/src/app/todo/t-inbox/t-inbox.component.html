@@ -22,19 +22,19 @@ margin-top: .5rem;">
 <!-- table container -->
 <ng-container *ngIf="inboxList">
   <nz-table #todoTable [nzData]="inboxList" [nzShowPagination]="inboxList.length >8? true:false" [nzPageSize]="8"
-    (nzCurrentPageDataChange)="demo($event)">
+    >
 
     <tbody>
-      <ng-container *ngFor="let data of todoTable.data">
+      <ng-container *ngFor="let data of todoTable.data; let i = index">
 
 
-        <tr *ngIf="!data.status">
+        <tr>
 
           <td style="width: 180px;">
             <label style="    display: flex;
               justify-content: flex-start;
               align-items: center;"
-              nz-checkbox [ngModel]="data.status" (click)="toggleTodo(data)"></label>
+              nz-checkbox [ngModel]="data.status" (click)="toggleTodo(data,i,'inbox')"></label>
 
           </td>
           <td style="cursor:pointer" (click)="openComponent(data)"><span class="td-title">{{data.title}}</span> </td>
@@ -58,26 +58,28 @@ margin-top: .5rem;">
 </nz-divider>
 <!-- archieve -->
 <ng-container *ngIf="inboxList&&displayArchieve">
-  <nz-table #archieveTable [nzData]="inboxList" [nzShowPagination]="false" (nzCurrentPageDataChange)="demo($event)">
+  <nz-table #archieveTable [nzData]="archieveList" [nzShowPagination]="false" >
 
     <tbody>
-      <ng-container *ngFor="let data of archieveTable.data">
+      <ng-container *ngFor="let data of archieveTable.data;let i = index">
 
 
-        <tr *ngIf="data.status">
+        <tr>
           <td style="width: 180px;">
             <label style="    display: flex;
                 justify-content: flex-start;
                 align-items: center;"
-              nz-checkbox [ngModel]="data.status" (click)="toggleTodo(data)"></label>
+              nz-checkbox [ngModel]="data.status" (click)="toggleTodo(data,i,'archieve')"></label>
 
           </td>
-          <td style="cursor:pointer" (click)="openComponent(data)">
+          <!--  (click)="openComponent(data)"
+ (click)="openComponent(data)" -->
+          <td style="cursor:pointer">
             <span class="td-title" style="text-decoration: line-through;">{{data.title}}</span>
           </td>
           <td>
             <i nz-icon type="left-circle" style="font-size: 18px;
-            color: #08c;" theme="outline" (click)="openComponent(data)"></i>
+            color: #08c;" theme="outline"></i>
           </td>
 
         </tr>

@@ -14,11 +14,22 @@
     </div>
   </nz-list-item>
   <!-- below is dynamic length of sub todos -->
-  <nz-list-item>
+  <nz-list-item *ngFor="let subTodo of localTodoItem.subTodo;let i = index" [ngStyle]="{'border-bottom': (i+1)==localTodoItem.subTodo.length ?'1px solid #e8e8e8':'none'}"
+    class="sub-todo-list">
     <div nz-row [nzAlign]="'middle'" [nzType]="'flex'" [nzGutter]="20" style="width: 100%">
-      <div nz-col nzSpan="2"> <label nz-checkbox [(ngModel)]="checked" (ngModelChange)="toggleTodo($event)"></label></div>
+      <div nz-col nzSpan="2"> <label nz-checkbox [(ngModel)]="subTodo.status" (ngModelChange)="toggleTodo()"></label></div>
       <div nz-col nzSpan="19">
-        <textarea nz-input placeholder="Input your subtodo" nzAutosize></textarea>
+        <textarea nz-input placeholder="Input your subtodo" [(ngModel)]="subTodo.title" (blur)="toggleTodo()"
+          nzAutosize></textarea>
+      </div>
+      <!-- add a table here -->
+    </div>
+  </nz-list-item>
+  <nz-list-item class="sub-todo-list">
+    <div nz-row [nzAlign]="'middle'" [nzType]="'flex'" [nzGutter]="20" style="width: 100%">
+      <div nz-col nzSpan="2"> <label nz-checkbox></label></div>
+      <div nz-col nzSpan="19">
+        <textarea nz-input placeholder="添加新的subtodo 还没搞, 缓一下把" nzAutosize></textarea>
       </div>
       <!-- add a table here -->
     </div>
@@ -27,7 +38,7 @@
     <div nz-row [nzAlign]="'top'" [nzType]="'flex'" [nzGutter]="20" style="width: 100%">
       <div nz-col nzSpan="2"><i nz-icon type="form" theme="outline"></i></div>
       <div nz-col nzSpan="19">
-        <textarea nz-input placeholder="Notes" [(ngModel)]="localTodoItem.note" [nzAutosize]="{ minRows: 3, maxRows: 6 }"></textarea>
+        <textarea nz-input placeholder="Notes" [(ngModel)]="localTodoItem.note" (blur)="toggleTodo()" [nzAutosize]="{ minRows: 3, maxRows: 6 }"></textarea>
       </div>
       <div nz-col nzSpan="2"><i nz-icon type="arrows-alt" theme="outline"></i></div>
 
@@ -44,8 +55,9 @@
     <div nz-col nzSpan="2"> <label nz-checkbox [(ngModel)]="localTodoItem.status" (ngModelChange)="toggleTodo($event)"></label></div>
     <div nz-col nzSpan="18">
       <!-- (blur)="toggleTodo()" -->
-      <textarea style="border:none" name="title" #title [(ngModel)]="localTodoItem.title" (keyup.enter)="toggleTodo()"
-         nz-input placeholder="large size" nzAutosize></textarea>
+      <!--  (keyup.enter)="toggleTodo()" -->
+      <textarea style="border:none" name="title" #title [(ngModel)]="localTodoItem.title" (blur)="toggleTodo()"
+        nz-input placeholder="large size" nzAutosize></textarea>
     </div>
     <!-- add a table here -->
   </div>

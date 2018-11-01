@@ -9,7 +9,8 @@ export interface TodoListInterface {
   status: boolean;
 }
 
-export interface TaskList {
+export interface Task {
+  _id: string;
   name: string;
 }
 
@@ -20,4 +21,10 @@ export interface TodoInterface {
   createdAt: string;
   note: string;
   status: boolean;
+
+  subTodo: {
+    _id: string;
+    title: string;
+    status: boolean;
+  }[];
 }

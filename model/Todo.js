@@ -26,7 +26,11 @@ const todoSchema = new Schema(
     title: String,
     note:String,
     deadLine: String,
-    status: Boolean
+    status: Boolean,
+    subTodo:[{
+      title:String,
+      status: Boolean
+    }]
     //  需要更多的 后面再添加就行了
   },
   {

@@ -13,3 +13,14 @@
   bottom: 0;
   display: block;
 }
+
+.sub-todo-list {
+  border: none;
+  border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+/* .sub-todo-list:last-child {
+  border-bottom: 1px solid #e8e8e8;
+} */

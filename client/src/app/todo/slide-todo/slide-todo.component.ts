@@ -29,7 +29,7 @@ export class SlideTodoComponent implements OnInit, OnChanges {
 
   checked: boolean = false;
 
-  toggleTodo(event) {
+  toggleTodo() {
     console.log(
       " toggle event : ",
       _.isEqual(this.todoItem, this.localTodoItem),
@@ -72,7 +72,13 @@ export class SlideTodoComponent implements OnInit, OnChanges {
       ...{},
       ...this.todoItem
     };
-    // console.log(this.localTodoItem, this.todoItem);
+    console.log([...this.todoItem.subTodo]);
+    this.localTodoItem.subTodo = [];
+    this.todoItem.subTodo.forEach(item => {
+      this.localTodoItem.subTodo.push({ ...{}, ...item });
+    });
+    // = [ ...this.todoItem.subTodo];
+    console.log(this.localTodoItem, this.todoItem);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

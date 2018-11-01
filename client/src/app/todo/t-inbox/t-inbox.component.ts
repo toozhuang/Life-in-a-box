@@ -9,7 +9,7 @@ import {
 import { TodoService } from "src/app/service/todo/todo.service";
 import {
   TodoListInterface,
-  TaskList,
+  Task,
   TodoInterface
 } from "src/app/service/interface/todo-list.interface";
 import { SlideTodoComponent } from "../slide-todo/slide-todo.component";
@@ -26,6 +26,9 @@ import * as _ from "lodash";
 export class TInboxComponent implements OnInit, OnChanges {
   public inboxList: TodoInterface[] = [];
 
+  // 这个是属于inboxList的, 而且完成了 list
+  public archieveList: TodoInterface[] = [];
+
   visible = false;
   isVisibleMiddle = false;
   taskID;
@@ -35,12 +38,28 @@ export class TInboxComponent implements OnInit, OnChanges {
   @ViewChild("todo")
   todo;
 
-  toggleTodo(todo: TodoInterface) {
+  toggleTodo(todo: TodoInterface, index: number, type: string) {
     this.inboxService
       .updateTodo({ ...todo, ...{ status: !todo.status } })
       .subscribe((result: any) => {
         if (result.status == 200) {
-          todo.status = !todo.status;
+          // todo.status = !todo.status;
+          // use the new result.todo
+          if (type === "inbox") {
+            this.inboxList = [
+              ...this.inboxList.slice(0, index),
+
+              ...this.inboxList.slice(index + 1)
+            ];
+            this.archieveList = [...this.archieveList, result.todo];
+          } else {
+            this.archieveList = [
+              ...this.archieveList.slice(0, index),
+
+              ...this.archieveList.slice(index + 1)
+            ];
+            this.inboxList = [...this.inboxList, result.todo];
+          }
         }
       });
 
@@ -50,7 +69,7 @@ export class TInboxComponent implements OnInit, OnChanges {
     });
   }
 
-  openComponent(todoItem: TaskList): void {
+  openComponent(todoItem: TodoInterface): void {
     const drawerRef = this.drawerService.create<SlideTodoComponent>({
       nzContent: SlideTodoComponent,
       nzWidth: 370,
@@ -101,10 +120,6 @@ export class TInboxComponent implements OnInit, OnChanges {
     });
   }
 
-  demo(event) {
-    console.log("trigger", event);
-  }
-
   constructor(
     private toggleService: ToggleTodoService,
     private drawerService: NzDrawerService,
@@ -112,28 +127,65 @@ export class TInboxComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.inboxService.task("inbox").subscribe((result: TodoInterface[]) => {
+    this.inboxService.task("inbox").subscribe((result: Task[]) => {
       console.log(result);
       // this.inboxList = result[0];
       this.taskID = result[0]._id;
-      this.inboxService.todolist(result[0]._id).subscribe((resultss: any) => {
-        console.log("--->", resultss);
-        this.inboxList = resultss;
-      });
+      this.inboxService
+        .todolist(result[0]._id)
+        .subscribe((resultss: TodoInterface[]) => {
+          console.log("--->", resultss);
+          this.inboxList = resultss.filter(item => !item.status);
+          this.archieveList = resultss.filter(item => item.status);
+          // this.inboxList = resultss;
+        });
     });
 
     this.toggleService.eventObv().subscribe((todo: TodoInterface) => {
       // value = value.todoTask;
 
-      this.inboxList.forEach((item, index) => {
+      this.archieveList.forEach((item, index) => {
         // console.log(todo, item,);
         if (item._id === todo._id) {
           // this.table.data[index] = { ...this.inboxList[index], ...todo };
-          this.inboxList = [
-            ...this.inboxList.slice(0, index),
-            todo,
-            ...this.inboxList.slice(index + 1)
-          ];
+          console.log(todo, item);
+          if (!todo.status) {
+            this.archieveList = [
+              ...this.archieveList.slice(0, index),
+
+              ...this.archieveList.slice(index + 1)
+            ];
+            this.inboxList = [...this.inboxList, todo];
+          } else {
+            this.archieveList = [
+              ...this.archieveList.slice(0, index),
+              todo,
+              ...this.archieveList.slice(index + 1)
+            ];
+          }
+        }
+      });
+
+      this.inboxList.forEach((item, index) => {
+        // console.log(todo, item,);
+
+        if (item._id === todo._id) {
+          // this.table.data[index] = { ...this.inboxList[index], ...todo };
+          if (todo.status) {
+            console.log(todo, item);
+            this.inboxList = [
+              ...this.inboxList.slice(0, index),
+
+              ...this.inboxList.slice(index + 1)
+            ];
+            this.archieveList = [...this.archieveList, todo];
+          } else {
+            this.inboxList = [
+              ...this.inboxList.slice(0, index),
+              todo,
+              ...this.inboxList.slice(index + 1)
+            ];
+          }
         }
       });
     });

@@ -54,11 +54,15 @@ module.exports = app => {
       // console.log(req.body.taskList);
       // then is update function
       todo = req.body.taskList;
+      console.log("todo: ", todo);
       if (req.body.taskList._id) {
         Todo.findById(todo._id).then(result => {
           //  这个要更改所有的值, 在这个里面
           result.title = todo.title;
           result.status = todo.status;
+          result.note = todo.note;
+          result.subTodo = todo.subTodo;
+          console.log("so : ,", result);
           // TODO:
           result.save().then(value => {
             console.log("test ", value);
