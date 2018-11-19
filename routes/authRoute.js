@@ -15,13 +15,24 @@ module.exports = app => {
   // 但是如果用户不存在, 那么就是跳转到创建用户界面
   app.post(
     "/api/auth/third",
-    passport.authenticate("local", { failureRedirect: "/api/auth/register" }),
+    passport.authenticate("local", {
+      failureRedirect: "/api/auth/loginErrorHandler",
+      failureFlash: true
+    }),
     (req, res) => {
       res.json({
         message: "demo"
       });
     }
   );
+
+  app.get('/api/auth/loginErrorHandler', (req, res) => {
+    console.log(req.body.logintype)
+    res.json({
+      status: false,
+      error: req.flash("message")
+    });
+  })
 
   app.get("/api/auth/check/:email", (req, res) => {
     console.log(req.params);
@@ -43,8 +54,8 @@ module.exports = app => {
   });
 
   // LOCAL SETTING
-  app.post("/api/auth/local", function(req, res, next) {
-    passport.authenticate("local", function(err, user, info) {
+  app.post("/api/auth/local", function (req, res, next) {
+    passport.authenticate("local", function (err, user, info) {
       console.log(req.body, err, user, info);
       if (err) {
         return next(err);
@@ -66,7 +77,7 @@ module.exports = app => {
       // This function is primarily used when users sign up,
       // during which req.login() can be invoked to automatically
       // log in the newly registered user.
-      req.logIn(user, function(err) {
+      req.logIn(user, function (err) {
         if (err) {
           // TODO: 暂时我的能力还不知道这个next err怎么用
           return next(err);

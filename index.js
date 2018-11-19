@@ -7,6 +7,7 @@ const credential = require("./config/keys");
 
 const cookieSession = require("cookie-session");
 const passport = require("passport");
+const flash = require("connect-flash");
 
 //load 其他的js文件
 
@@ -43,6 +44,7 @@ if (process.env.NODE_ENV !== "production") {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(flash());
 
 // tell express use cookie
 

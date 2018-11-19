@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, NgZone } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/service/core/auth.service";
 
 // third
-import * as Cookies from "js-cookie";
 import { Router } from "@angular/router";
 import { StatusCheckInterface } from "src/app/service/interface/status.interface";
 import { NzMessageService } from "ng-zorro-antd";
+import { environment } from "src/environments/environment";
 
 declare const gapi: any;
 
@@ -49,11 +49,12 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
+    private ngZone: NgZone,
     private message: NzMessageService,
     private route: Router,
     private authService: AuthService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -63,13 +64,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  //TODO: google login stuff
+  ngAfterViewInit() {
+    this.googleInit();
+  }
+
+
+  // Note: 下面是谷歌登录的逻辑, 来自google的官网, 添加了一点自己的logic
   public auth2: any;
   public googleInit() {
     gapi.load("auth2", () => {
       this.auth2 = gapi.auth2.init({
-        client_id:
-          "476464475225-g7f37145f17onm1gpfir9o657ht9uft0.apps.googleusercontent.com",
+        client_id: environment.auth.google_id,
         cookiepolicy: "single_host_origin",
         scope: "profile email"
       });
@@ -82,15 +87,19 @@ export class LoginComponent implements OnInit {
       {},
       googleUser => {
         let profile = googleUser.getBasicProfile();
-        // console.log("Token || " + googleUser.getAuthResponse().id_token);
-        // console.log("ID: " + profile.getId());
-        // console.log("Name: " + profile.getName());
-        // console.log("Image URL: " + profile.getImageUrl());
-        // console.log("Email: " + profile.getEmail());
-        //YOUR CODE HERE
-        // this.route.navigateByUrl("/core");
-        this.authService.loginThird(profile.getId()).subscribe(value => {
+
+        this.authService.loginThird(profile.getId()).subscribe((value: any) => {
           console.log(value);
+          if (value.status) {
+            // 要把 profile.getId() push到当前的current user的 ID里面去
+          } else {
+            // 显示需要注册先
+            this.message.create('error', '该Gmail用户尚未注册,跳转到注册界面');
+            // 跳转到注册界面 Note: 需要用ngZone跳转才可以, 不知道算不算angular的bug
+            setTimeout(() => {
+              this.ngZone.run(() => this.route.navigateByUrl('/auth/register').then());
+            }, 1000);
+          }
           // 判断登录是否成功
         });
       },
@@ -100,7 +109,5 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngAfterViewInit() {
-    this.googleInit();
-  }
+
 }

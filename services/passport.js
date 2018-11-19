@@ -54,28 +54,28 @@ passport.use(
     },
     (req, email, password, done) => {
       // 每次到这里来的时候, 都要先logout一下
-      req.logout();
-      // console.log("这个是正常的login时候的状态", req.body);
+      // req.logout();
+      console.log("这个是正常的login时候的状态", req.body);
       // third:
-      if (req.body.type) {
-        console.log(req.body);
+      if (req.body.logintype) {
+        console.log('login type:', req.body);
         let obj = {};
-        obj[req.body.type + "Id"] = req.body.id;
+        obj["thirdId"] = req.body.thirdId;
         User.findOne(obj).then(user => {
           console.log("get user ?", user, obj);
           if (!user) {
             console.log(
-              "虽然有用户, 但是该user并没有注册, 也就是说用google登录,但是并没有激活用户"
+              "该用户并没有注册, 跳转到注册页面让他注册"
             );
             // 再这个地方进行一次注册用户?
-            return done(null, false);
+            return done(null, false, req.flash("message", "请注册对应的lifebox账户"));
           } else {
             return done(null, user);
           }
         });
       } else {
         // local check
-        console.log('local check', req.body, email, password,{ email: email })
+        console.log('local check', req.body, email, password, { email: email })
         User.findOne({ email: email })
           .then(user => {
             console.log("查找到user: ", user);

@@ -11,7 +11,7 @@ import { LifeHttpService } from "./life-http.service";
   providedIn: "root"
 })
 export class AuthService {
-  constructor(private route: Router, private coreService: LifeHttpService) {}
+  constructor(private route: Router, private coreService: LifeHttpService) { }
 
   logout() {
     return this.coreService.get("api/auth/logout");
@@ -26,15 +26,15 @@ export class AuthService {
   }
 
   loginThird(loginID) {
-    console.log(`/api/auth/${loginID}`);
+    console.log(loginID);
     // 其实进入到这个地方 就已经登录成功了, 拿到了google的ID
     // 接下来是要把这个id存储到我的数据库里面
     return this.coreService.post(
       {
-        username: "empty",
+        email: "empty",
         password: "empty",
-        id: loginID,
-        type: "google"
+        thirdId: loginID,
+        logintype: "third"
       },
       `/api/auth/third`
     );

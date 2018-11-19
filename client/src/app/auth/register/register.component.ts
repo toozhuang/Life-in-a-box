@@ -10,7 +10,7 @@ import { UniqueEmailValidator } from "src/app/shared/uniqueEmailValidator.direct
 import { mustBetrueValidator } from "src/app/shared/mustbetrue.validator";
 import { AuthService } from "src/app/service/core/auth.service";
 import { StatusCheckInterface } from "src/app/service/interface/status.interface";
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { NzMessageService } from "ng-zorro-antd";
 
 @Component({
@@ -76,13 +76,19 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private message: NzMessageService,
+    private activeroute: ActivatedRoute,
     private router: Router,
     private emailTakenValidator: UniqueEmailValidator,
     private authService: AuthService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+
+    this.activeroute.data.subscribe(value => {
+      console.log(value);
+    })
+
     this.validateForm = this.fb.group({
       email: new FormControl(null, {
         validators: Validators.required,

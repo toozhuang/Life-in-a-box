@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  auth: {
+    google_id: "476464475225-g7f37145f17onm1gpfir9o657ht9uft0.apps.googleusercontent.com",
+  }
 };
 
 // export const baseURL = "http://localhost:5000/";

@@ -22,7 +22,8 @@ const authRoute: Routes = [
       },
       {
         path: "register",
-        component: RegisterComponent
+        component: RegisterComponent,
+        data: { thirdId: 'Heroes List' }
       }
     ]
   }
@@ -32,4 +33,4 @@ const authRoute: Routes = [
   imports: [CommonModule, SharedModule, RouterModule.forChild(authRoute)],
   declarations: [AuthComponent, LoginComponent, RegisterComponent]
 })
-export class AuthModule {}
+export class AuthModule { }

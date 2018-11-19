@@ -13,6 +13,8 @@ import { rootRoutes } from "./root-routing";
 import { FormsModule } from '@angular/forms';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
+import { StoreModule } from "@ngrx/store";
+
 registerLocaleData(zh);
 
 @NgModule({
