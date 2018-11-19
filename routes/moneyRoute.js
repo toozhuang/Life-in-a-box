@@ -43,6 +43,45 @@ module.exports = app => {
     res.send("jpwa re upi");
   });
 
+  app.post("/api/money/category", (req, res) => {
+    if (req.user) {
+      let category = {};
+      category.category = req.body.category;
+      category.userId = req.user.id;
+      category.accountBook = req.body.accountBook;
+      category.subCategory = req.body.subCategory;
+      // console.log("category: ", category);
+      Category.find({ category: req.body.category }).then(result => {
+        // console.log("---->", result);
+        if (result && result.length != 0) {
+          if (result[0].subCategory.length != category.subCategory.length) {
+            result[0].subCategory = category.subCategory;
+            result[0].save().then(value => {
+              res.json({
+                status: 200,
+                message: "创建成功",
+                value: value
+              });
+            });
+          }
+
+          res.json({
+            status: 200,
+            message: "该类别已经存在"
+          });
+        } else {
+          Category.create(category).then(result => {
+            res.json({
+              status: 200,
+              message: "创建成功",
+              value: result
+            });
+          });
+        }
+      });
+    }
+  });
+
   app.get("/api/money/categoryList", (req, res) => {
     if (req.user) {
       Category.find({ userId: req.user.id }).then(result => {
@@ -91,8 +130,8 @@ module.exports = app => {
           result.save().then(result => {
             // console.log("save ?");
             result.costDate = moment
-            .unix(result.costDate)
-            .format("MM-DD-YYYY HH:mm");
+              .unix(result.costDate)
+              .format("MM-DD-YYYY HH:mm");
             res.json({
               status: 200,
               message: "保存成功",

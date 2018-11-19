@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const categorySchema = new Schema(
   {
     userId: String,
+    type: String,
     category: String,
     subCategory: [String],
     accountBook: String

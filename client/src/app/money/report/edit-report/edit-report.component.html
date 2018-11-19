@@ -11,7 +11,7 @@
           <div nz-col nzSpan="14">
             <nz-form-item>
               <nz-form-label [nzSpan]="5" nzFor="cost">Cost</nz-form-label>
-              <nz-form-control [nzSpan]="17">
+              <nz-form-control [nzSpan]="17" [nzHasFeedback]="true">
                 <input nz-input name="cost" type="cost" id="cost" formControlName='cost'>
                 <nz-form-explain *ngIf="costForm.get('cost').dirty && costForm.get('cost').errors">Please
                   input the cost!</nz-form-explain>
@@ -23,21 +23,32 @@
           <div nz-col nzSpan="14">
             <nz-form-item>
               <nz-form-label [nzSpan]="5" nzFor="category">Category</nz-form-label>
-              <nz-form-control [nzSpan]="17">
+              <nz-form-control [nzSpan]="17" [nzHasFeedback]="true">
                 <!-- <input nz-input name="category" type="category" id="category" formControlName='category'> -->
-                <nz-select name="category" style="width: 120px;" formControlName='category' (ngModelChange)="resetSubCategorylist($event)">
+                <nz-select name="category" style="width: 75%;" formControlName='category' (ngModelChange)="resetSubCategorylist($event)">
                   <nz-option *ngFor="let p of categoryList" [nzValue]="p.category" [nzLabel]="p.category"></nz-option>
+                  <nz-option nzCustomContent [nzValue]="'icon'" [nzLabel]="">
+                    <i nz-icon type="plus" theme="outline" style="margin-left: 30px"></i>
+                  </nz-option>
                 </nz-select>
               </nz-form-control>
+
             </nz-form-item>
           </div>
+
           <div nz-col nzSpan="10">
             <nz-form-item>
-              <nz-form-control [nzSpan]="16">
+              <nz-form-control [nzSpan]="22" [nzHasFeedback]="true">
                 <!-- <input nz-input name="subCategory" type="subCategory" id="subCategory" formControlName='subCategory'> -->
-                <nz-select name="subCategory" style="width: 100%;" formControlName='subCategory' (ngModelChange)="provinceChange($event)">
+                <nz-select name="subCategory" style="width: 100%;" formControlName='subCategory' (ngModelChange)="addSubCatergory($event)">
                   <nz-option *ngFor="let p of subCategoryList" [nzValue]="p" [nzLabel]="p"></nz-option>
+                  <nz-option nzCustomContent [nzValue]="'icon'" [nzLabel]="">
+                    <i nz-icon type="plus" theme="outline" style="margin-left: 30px"></i>
+                  </nz-option>
                 </nz-select>
+                <!--  -->
+                <nz-form-explain *ngIf="costForm.get('subCategory').dirty && costForm.get('subCategory').errors">Please
+                  input the subcategory!</nz-form-explain>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -55,9 +66,9 @@
           </div>
           <div nz-col nzSpan="10">
             <nz-form-item>
-              <nz-form-label [nzSpan]="9" nzFor="accountbook">account book</nz-form-label>
+              <nz-form-label [nzSpan]="9" nzFor="accountbook" style="text-align: left">account book</nz-form-label>
               <nz-form-control [nzSpan]="15">
-                <input  nz-input name="accountbook" type="accountbook" id="accountbook" formControlName='accountBook'>
+                <input nz-input name="accountbook" type="accountbook" id="accountbook" formControlName='accountBook'>
               </nz-form-control>
             </nz-form-item>
           </div>
@@ -97,3 +108,36 @@
 
   </form>
 </div>
+
+
+
+<ng-template #addCategoryModalTitle>
+  <span>Manage {{modalTitle}}</span>
+</ng-template>
+<ng-template #addCategoryModalContent>
+  <nz-input-group [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
+    <input type="text" nz-input [placeholder]="'输入你想添加的'+modalTitle" [(ngModel)]="newCategory">
+  </nz-input-group>
+  <ng-template #prefixTemplate><i nz-icon type="tags" theme="outline"></i></ng-template>
+  <ng-template #suffixTemplate><i nz-icon type="close-circle" (click)="newCategory = ''" *ngIf="newCategory"></i></ng-template>
+</ng-template>
+<ng-template #addCategoryModalFooter>
+  <button nz-button nzType="primary" (click)="addCategory()" [nzLoading]="tplModalButtonLoading">添加{{modalTitle}}</button>
+  <button nz-button nzType="primary" (click)="destroyTplModal()">取消</button>
+</ng-template>
+
+
+<ng-template #addSubCategoryModalTitle>
+  <span>Manage {{modalTitle}}</span>
+</ng-template>
+<ng-template #addSubCategoryModalContent>
+  <nz-input-group [nzSuffix]="suffixTemplate" [nzPrefix]="prefixTemplate">
+    <input type="text" nz-input [placeholder]="'输入你想添加的'+modalTitle" [(ngModel)]="newSubcategory">
+  </nz-input-group>
+  <ng-template #prefixTemplate><i nz-icon type="tags" theme="outline"></i></ng-template>
+  <ng-template #suffixTemplate><i nz-icon type="close-circle" (click)="newSubcategory = ''" *ngIf="newSubcategory"></i></ng-template>
+</ng-template>
+<ng-template #addSubCategoryModalFooter>
+  <button nz-button nzType="primary" (click)="addSubCategory()" [nzLoading]="tplModalButtonLoading">添加{{modalTitle}}</button>
+  <button nz-button nzType="primary" (click)="destroyTplModal()">取消</button>
+</ng-template>

@@ -38,4 +38,8 @@ export class CostService {
   create(cost: any) {
     return this.httpService.post(cost, API.cost);
   }
+
+  generateCategory(category) {
+    return this.httpService.post(category, API.category);
+  }
 }

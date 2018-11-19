@@ -13,12 +13,15 @@ import { EditReportComponent } from "./report/edit-report/edit-report.component"
 import { RecordMoneyComponent } from "./record/record-money.component";
 import { RecordIncomeComponent } from "./record/record-income/record-income.component";
 import { RecordCostComponent } from "./record/record-cost/record-cost.component";
+import { SettingComponent } from "./setting/setting.component";
+import { CategoryEditComponent } from './setting/category-edit/category-edit.component';
 
 const moneyRoute: Routes = [
   { path: "", redirectTo: "dashboard", pathMatch: "full" },
   { path: "dashboard", component: DashboardComponent },
   { path: "report", component: ReportComponent },
-  { path: "addRecord", component: RecordMoneyComponent }
+  { path: "addRecord", component: RecordMoneyComponent },
+  { path: "setting", component: SettingComponent }
 ];
 
 @NgModule({
@@ -33,7 +36,9 @@ const moneyRoute: Routes = [
     // record
     RecordMoneyComponent,
     RecordCostComponent,
-    RecordIncomeComponent
+    RecordIncomeComponent,
+    SettingComponent,
+    CategoryEditComponent
   ]
 })
 export class MoneyModule {}

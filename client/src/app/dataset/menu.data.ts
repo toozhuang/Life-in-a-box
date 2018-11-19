@@ -41,6 +41,11 @@ export const menu: Array<Menu> = [
         name: "Add a Record",
         routerlink: "/core/money/addRecord",
         auth: "super"
+      },
+      {
+        name: "Setting",
+        routerlink: "/core/money/setting",
+        auth: "admin"
       }
     ]
   },
