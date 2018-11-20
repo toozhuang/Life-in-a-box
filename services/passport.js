@@ -79,14 +79,15 @@ passport.use(
             console.log("查找到user: ", user);
             if (!user) {
               // 即用户不存在
-              return done(null, false, { message: "no user found" });
+              return done(null, false, req.flash("message", "no user found"));
             }
 
             if (user && user.password !== password) {
-              return done(null, false, { message: "password is not right" });
+              return done(null, false, req.flash("message", "password is not right"));
             }
 
             // 登录成功
+            console.log('login success,find user');
             return done(null, user);
           })
           .catch(err => {

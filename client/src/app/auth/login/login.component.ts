@@ -9,7 +9,7 @@ import { NzMessageService } from "ng-zorro-antd";
 import { environment } from "src/environments/environment";
 import { Store } from "@ngrx/store";
 import { State } from "../reducers/auth.reducer";
-import { StoreUser } from "../actions/auth.actions";
+import { StoreUser, Login } from "../actions/auth.actions";
 
 declare const gapi: any;
 
@@ -32,22 +32,23 @@ export class LoginComponent implements OnInit {
     }
 
     // console.log(" worked", this.validateForm.value);
-    this.authService
-      .login(
-        {
-          ...this.validateForm.value,
-          ...{ logintype: 'local' }
-        }).subscribe((value: StatusCheckInterface) => {
-          console.log(" anything com here ? ", value);
-          if (value.status) {
-            // login success
-            this.route.navigateByUrl("/core");
-          } else {
-            console.log(value);
-            this.message.remove();
-            this.createMessage("error", value.message);
-          }
-        });
+    this.store.dispatch(new Login({
+      ...this.validateForm.value,
+      ...{ logintype: 'local' }
+    }))
+    // this.authService
+    //   .login(
+    //    ).subscribe((value: StatusCheckInterface) => {
+    //       console.log(" anything com here ? ", value);
+    //       if (value.status) {
+    //         // login success
+    //         this.route.navigateByUrl("/core");
+    //       } else {
+    //         console.log(value);
+    //         this.message.remove();
+    //         this.createMessage("error", value.message);
+    //       }
+    //     });
   }
 
   createMessage(type: string, message: string): void {

@@ -13,7 +13,6 @@ module.exports = app => {
   app.post("/api/auth/login",
     passport.authenticate("local", { failureRedirect: "/api/auth/loginErrorHandler", failureFlash: true }), (req, res) => {
       console.log('我来了, 碉堡了', req.user);
-
       res.json({
         status: true,
         message: "success"

@@ -5,7 +5,7 @@ import { AuthService } from "src/app/service/core/auth.service";
 import { Observable } from "rxjs";
 import { Action } from "@ngrx/store";
 import { Login, AuthenticateTypes, LoginSuccess } from "../actions/auth.actions";
-import { map, exhaustMap } from "rxjs/operators";
+import { map, exhaustMap, tap } from "rxjs/operators";
 import { Authenticate } from "src/app/models/user";
 
 @Injectable()
@@ -15,9 +15,22 @@ export class AuthEffects {
         ofType<Login>(AuthenticateTypes.login),
         map(action => action.payload),
         exhaustMap((authObj: Authenticate) => {
-            return this.authService.login(authObj).pipe(map((user: any) => new LoginSuccess({ user })))
+            return this.authService.login(authObj).pipe(map((user: any) => {
+                console.log('看一看 user ', user)
+                return new LoginSuccess({ user })
+            }))
         })
     );
+
+    @Effect({ dispatch: false })
+    loginSuccess$: Observable<Action> = this.actions$.pipe(
+        ofType<LoginSuccess>(AuthenticateTypes.LoginSuccess),
+        tap(action => {
+            console.log('好奇这个action是什么值', action)
+            this.router.navigateByUrl("/core");
+        })
+
+    )
 
 
 

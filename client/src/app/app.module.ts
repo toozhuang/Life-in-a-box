@@ -15,6 +15,8 @@ import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
 import { StoreModule } from "@ngrx/store";
 import { reducer } from "./reducers";
+import { EffectsModule } from "@ngrx/effects";
+import { AuthEffects } from "./auth/effects/auth.effects";
 
 registerLocaleData(zh);
 
@@ -27,6 +29,7 @@ registerLocaleData(zh);
 
     RouterModule.forRoot(rootRoutes),
     StoreModule.forRoot(reducer),
+    EffectsModule.forRoot([AuthEffects]),
     HttpClientModule,
     FormsModule,
     NgZorroAntdModule
