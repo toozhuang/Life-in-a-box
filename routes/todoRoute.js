@@ -119,9 +119,10 @@ module.exports = app => {
 
   //获取某一个task
   app.get("/api/task/:task", (req, res) => {
+    console.log(req.user._id)
     if (req.user) {
       console.log(req.params.task);
-      Task.find({ name: req.params.task }).then(result => {
+      Task.find({ name: req.params.task , userId: req.user._id}).then(result => {
         console.log("get all", result);
         res.json(result);
       });

@@ -7,6 +7,9 @@ import { Router } from "@angular/router";
 import { StatusCheckInterface } from "src/app/service/interface/status.interface";
 import { NzMessageService } from "ng-zorro-antd";
 import { environment } from "src/environments/environment";
+import { Store } from "@ngrx/store";
+import { State } from "../reducers/auth.reducer";
+import { StoreUser } from "../actions/auth.actions";
 
 declare const gapi: any;
 
@@ -30,18 +33,21 @@ export class LoginComponent implements OnInit {
 
     // console.log(" worked", this.validateForm.value);
     this.authService
-      .login(this.validateForm.value)
-      .subscribe((value: StatusCheckInterface) => {
-        console.log(" anything com here ? ", value);
-        if (value.status) {
-          // login success
-          this.route.navigateByUrl("/core");
-        } else {
-          console.log(value);
-          this.message.remove();
-          this.createMessage("error", value.message);
-        }
-      });
+      .login(
+        {
+          ...this.validateForm.value,
+          ...{ logintype: 'local' }
+        }).subscribe((value: StatusCheckInterface) => {
+          console.log(" anything com here ? ", value);
+          if (value.status) {
+            // login success
+            this.route.navigateByUrl("/core");
+          } else {
+            console.log(value);
+            this.message.remove();
+            this.createMessage("error", value.message);
+          }
+        });
   }
 
   createMessage(type: string, message: string): void {
@@ -49,6 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
+    private store: Store<State>,
     private ngZone: NgZone,
     private message: NzMessageService,
     private route: Router,
@@ -87,16 +94,26 @@ export class LoginComponent implements OnInit {
       {},
       googleUser => {
         let profile = googleUser.getBasicProfile();
-
-        this.authService.loginThird(profile.getId()).subscribe((value: any) => {
+        const user = {
+          email: "empty",
+          password: "empty",
+          thirdId: profile.getId(),
+          logintype: 'third'
+        };
+        this.authService.login(
+          user
+        ).subscribe((value: any) => {
           console.log(value);
           if (value.status) {
             // 要把 profile.getId() push到当前的current user的 ID里面去
+            this.ngZone.run(() => this.route.navigateByUrl('/core').then());
           } else {
-            // 显示需要注册先
+            // 把需要注册的google id 和 用户稍后注册的信息联系起来
+            this.store.dispatch(new StoreUser(user))
             this.message.create('error', '该Gmail用户尚未注册,跳转到注册界面');
             // 跳转到注册界面 Note: 需要用ngZone跳转才可以, 不知道算不算angular的bug
             setTimeout(() => {
+
               this.ngZone.run(() => this.route.navigateByUrl('/auth/register').then());
             }, 1000);
           }

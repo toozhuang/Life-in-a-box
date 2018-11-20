@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 import { NgZorroAntdModule, NZ_I18N, zh_CN } from 'ng-zorro-antd';
 
 import { StoreModule } from "@ngrx/store";
+import { reducer } from "./reducers";
 
 registerLocaleData(zh);
 
@@ -25,6 +26,7 @@ registerLocaleData(zh);
     HttpClientModule,
 
     RouterModule.forRoot(rootRoutes),
+    StoreModule.forRoot(reducer),
     HttpClientModule,
     FormsModule,
     NgZorroAntdModule
@@ -34,4 +36,4 @@ registerLocaleData(zh);
 
   providers: [{ provide: NZ_I18N, useValue: zh_CN }]
 })
-export class AppModule {}
+export class AppModule { }

@@ -12,6 +12,8 @@ import { AuthService } from "src/app/service/core/auth.service";
 import { StatusCheckInterface } from "src/app/service/interface/status.interface";
 import { Router, ActivatedRoute } from "@angular/router";
 import { NzMessageService } from "ng-zorro-antd";
+import { State } from "../reducers/auth.reducer";
+import { Store } from "@ngrx/store";
 
 @Component({
   selector: "app-register",
@@ -23,13 +25,20 @@ export class RegisterComponent implements OnInit {
 
   generateStatus: number = 0;
 
+  thirdId: string;
+
   submitForm(): void {
     console.log("创建用户: ", this.validateForm, this.validateForm.valid);
 
     if (this.validateForm.dirty) {
       if (this.validateForm.valid) {
+
         this.authService
-          .register(this.validateForm.value)
+          .register({
+            ...this.validateForm.value, ...{
+              thirdId: this.thirdId ? this.thirdId : null
+            }
+          })
           .subscribe((value: StatusCheckInterface) => {
             console.log("resgister result", value);
             if (value.status) {
@@ -50,6 +59,7 @@ export class RegisterComponent implements OnInit {
               this.generateStatus = 0;
             }, 2000);
           });
+
       }
     } else {
       for (const i in this.validateForm.controls) {
@@ -75,6 +85,7 @@ export class RegisterComponent implements OnInit {
   };
 
   constructor(
+    private store: Store<State>,
     private message: NzMessageService,
     private activeroute: ActivatedRoute,
     private router: Router,
@@ -85,8 +96,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activeroute.data.subscribe(value => {
-      console.log(value);
+    this.store.select('auth').subscribe((value: any) => {
+      console.log('value: ', value);
+      if (!value.loggedIn && value.user && value.user.thirdId) {
+        this.thirdId = value.user.thirdId
+      }
     })
 
     this.validateForm = this.fb.group({

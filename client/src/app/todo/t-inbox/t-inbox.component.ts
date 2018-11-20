@@ -124,21 +124,24 @@ export class TInboxComponent implements OnInit, OnChanges {
     private toggleService: ToggleTodoService,
     private drawerService: NzDrawerService,
     private inboxService: TodoService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.inboxService.task("inbox").subscribe((result: Task[]) => {
       console.log(result);
       // this.inboxList = result[0];
-      this.taskID = result[0]._id;
-      this.inboxService
-        .todolist(result[0]._id)
-        .subscribe((resultss: TodoInterface[]) => {
-          console.log("--->", resultss);
-          this.inboxList = resultss.filter(item => !item.status);
-          this.archieveList = resultss.filter(item => item.status);
-          // this.inboxList = resultss;
-        });
+      if (result && result.length) {
+        this.taskID = result[0]._id;
+        this.inboxService
+          .todolist(result[0]._id)
+          .subscribe((resultss: TodoInterface[]) => {
+            console.log("--->", resultss);
+            this.inboxList = resultss.filter(item => !item.status);
+            this.archieveList = resultss.filter(item => item.status);
+            // this.inboxList = resultss;
+          });
+      }
+
     });
 
     this.toggleService.eventObv().subscribe((todo: TodoInterface) => {

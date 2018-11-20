@@ -6,25 +6,20 @@ const mongoose = require("mongoose");
 const User = mongoose.model("user");
 
 module.exports = app => {
-  // app.get
 
-  app.use(cors());
+  /**
+   * login
+   */
+  app.post("/api/auth/login",
+    passport.authenticate("local", { failureRedirect: "/api/auth/loginErrorHandler", failureFlash: true }), (req, res) => {
+      console.log('我来了, 碉堡了', req.user);
 
-  // third login
-  // 这个地方只能登录成功
-  // 但是如果用户不存在, 那么就是跳转到创建用户界面
-  app.post(
-    "/api/auth/third",
-    passport.authenticate("local", {
-      failureRedirect: "/api/auth/loginErrorHandler",
-      failureFlash: true
-    }),
-    (req, res) => {
       res.json({
-        message: "demo"
+        status: true,
+        message: "success"
       });
-    }
-  );
+
+    })
 
   app.get('/api/auth/loginErrorHandler', (req, res) => {
     console.log(req.body.logintype)
@@ -131,6 +126,7 @@ module.exports = app => {
       saveUser.email = body.email;
       saveUser.username = body.username;
       saveUser.password = body.password;
+      saveUser.thirdId = body.thirdId;
 
       User.create(saveUser, (err, result) => {
         if (err) {
