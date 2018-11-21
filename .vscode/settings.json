@@ -1,3 +1,43 @@
 {
-    "workbench.colorTheme": "Darcula"
-}
+    "workbench.colorTheme": "Default Light+",
+    "breadcrumbs.enabled": true,
+    "window.zoomLevel": 1,
+    "explorer.confirmDelete": false,
+    "editor.fontFamily": "Monaco,Menlo, 'Courier New', monospace",
+    "git.autofetch": true,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.iconTheme": "vscode-icons",
+    "git.enableSmartCommit": true,
+    "vsicons.projectDetection.autoReload": true,
+    "prettier.singleQuote": true,
+    "workbench.editor.enablePreview": false,
+    "editor.minimap.enabled": false,
+    "gitlens.mode.active": "zen",
+    "git.confirmSync": false,
+    "window.nativeFullScreen": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "todohighlight.keywords": [
+      "DEBUG:",
+      "REVIEW:",
+      {
+        "text": "Note:",
+        "color": "#ff0000",
+        "backgroundColor": "yellow",
+        "overviewRulerColor": "grey"
+      },
+      {
+        "text": "HACK:",
+        "color": "#000",
+        "isWholeLine": false
+      },
+      {
+        "text": "Todo:",
+        "color": "red",
+        "border": "1px solid red",
+        "borderRadius": "2px", //NOTE: using borderRadius along with `border` or you will see nothing change
+        "backgroundColor": "rgba(0,0,0,.2)"
+        //other styling properties goes here ...
+      }
+    ]
+  }
+  

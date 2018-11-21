@@ -1,49 +1,75 @@
-<form style="min-width: 368px !important" nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+<form
+  style="min-width: 368px !important"
+  nz-form
+  [formGroup]="validateForm"
+  class="login-form"
+  (ngSubmit)="submitForm()"
+>
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
-        <input type="text" nz-input formControlName="email" placeholder="email" emailTakenCheck>
+        <input
+          type="text"
+          nz-input
+          formControlName="email"
+          placeholder="email"
+          emailTakenCheck
+        />
       </nz-input-group>
-      <nz-form-explain style="    text-align: left;" *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">Please
-        input
-        your email!</nz-form-explain>
+      <nz-form-explain
+        style="    text-align: left;"
+        *ngIf="
+          validateForm.get('email').dirty && validateForm.get('email').errors
+        "
+        >Please input your email!</nz-form-explain
+      >
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
-        <input type="password" nz-input formControlName="password" placeholder="Password">
+        <input
+          type="password"
+          nz-input
+          formControlName="password"
+          placeholder="Password"
+        />
       </nz-input-group>
-      <nz-form-explain style="    text-align: left;" *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please
-        input
-        your Password!</nz-form-explain>
+      <nz-form-explain
+        style="    text-align: left;"
+        *ngIf="
+          validateForm.get('password').dirty &&
+          validateForm.get('password').errors
+        "
+        >Please input your Password!</nz-form-explain
+      >
     </nz-form-control>
   </nz-form-item>
   <nz-form-item style="    margin-bottom: 12px;">
-    <div nz-col nzSpan="8">
+    <div nz-col nzSpan="8" style="text-align:left">
       <label nz-checkbox formControlName="remember">
-        <span>Remember me</span>
+        <span>记住我</span>
       </label>
     </div>
     <div nz-col nzSpan="8" nzOffset="8">
-      <a class="login-form-forgot" class="login-form-forgot">Forget Password</a>
+      <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
     </div>
-
   </nz-form-item>
   <nz-form-item>
-    <button nz-button nzType="primary" nzBlock [disabled]="!validateForm.valid">Login</button>
+    <button nz-button nzType="primary" nzBlock [disabled]="!validateForm.valid">
+      Login
+    </button>
   </nz-form-item>
   <nz-form-item>
     <div nz-col nzSpan="8" style="    text-align: left">
-      Login with &nbsp;
+      第三方登录&nbsp;
 
       <!-- <i class="anticon anticon-google" id="googleBtn"></i> -->
       <i nz-icon type="google" theme="outline" id="googleBtn"></i>
     </div>
 
-
     <div nz-col nzSpan="8" nzOffset="8" style="    text-align: right">
-      <a routerLink="/auth/register">Register</a>
+      <a routerLink="/auth/register">注册</a>
     </div>
   </nz-form-item>
 </form>

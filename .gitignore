@@ -25,7 +25,7 @@ client*.sublime-workspace
 
 # IDE - VSCode
 client/.vscode/*
-client/!.vscode/settings.json
+# client/!.vscode/settings.json
 client/!.vscode/tasks.json
 client/!.vscode/launch.json
 client/!.vscode/extensions.json

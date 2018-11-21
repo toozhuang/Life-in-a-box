@@ -1,62 +1,68 @@
 // require的是包里面本身的,不是我写的
-const passport = require("passport");
-const cors = require("cors");
+const passport = require('passport');
+const cors = require('cors');
 
-const mongoose = require("mongoose");
-const User = mongoose.model("user");
+const mongoose = require('mongoose');
+const User = mongoose.model('user');
 
 module.exports = app => {
-
   /**
    * login
    */
-  app.post("/api/auth/login",
-    passport.authenticate("local", { failureRedirect: "/api/auth/loginErrorHandler", failureFlash: true }), (req, res) => {
+  app.post(
+    '/api/auth/login',
+    passport.authenticate('local', {
+      failureRedirect: '/api/auth/loginErrorHandler',
+      failureFlash: true
+    }),
+    (req, res) => {
       console.log('我来了, 碉堡了', req.user);
+      // 如果成功了, 我应该 flush 一个 user 过去才对
       res.json({
         status: true,
-        message: "success"
+        message: 'success',
+        user: req.user
       });
-
-    })
+    }
+  );
 
   app.get('/api/auth/loginErrorHandler', (req, res) => {
-    console.log(req.body.logintype)
+    console.log(req.body.logintype);
     res.json({
       status: false,
-      error: req.flash("message")
+      error: req.flash('message')
     });
-  })
+  });
 
-  app.get("/api/auth/check/:email", (req, res) => {
+  app.get('/api/auth/check/:email', (req, res) => {
     console.log(req.params);
     setTimeout(() => {
       User.findOne({ email: req.params.email }).then(user => {
         if (user) {
           res.json({
             status: true,
-            message: "存在该user"
+            message: '存在该user'
           });
           return;
         }
         res.json({
           status: false,
-          message: "不存在该user"
+          message: '不存在该user'
         });
       });
     }, 1000);
   });
 
   // LOCAL SETTING
-  app.post("/api/auth/local", function (req, res, next) {
-    passport.authenticate("local", function (err, user, info) {
+  app.post('/api/auth/local', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
       console.log(req.body, err, user, info);
       if (err) {
         return next(err);
       }
       if (!user) {
         // return res.redirect(`/api/auth/error/${info.message}`);
-        console.log("come here");
+        console.log('come here');
         res.json({
           status: false,
           message: `${info.message}`
@@ -71,7 +77,7 @@ module.exports = app => {
       // This function is primarily used when users sign up,
       // during which req.login() can be invoked to automatically
       // log in the newly registered user.
-      req.logIn(user, function (err) {
+      req.logIn(user, function(err) {
         if (err) {
           // TODO: 暂时我的能力还不知道这个next err怎么用
           return next(err);
@@ -79,45 +85,45 @@ module.exports = app => {
         // console.log(" come ? ");
         res.json({
           status: true,
-          message: "success"
+          message: 'success'
         });
       });
     })(req, res, next);
   });
 
-  app.get("/api/auth/logout", (req, res) => {
+  app.get('/api/auth/logout', (req, res) => {
     req.logout();
     res.json({
       status: true,
-      message: "logout successful"
+      message: 'logout successful'
     });
   });
 
-  app.get("/api/auth/current_user", (req, res) => {
+  app.get('/api/auth/current_user', (req, res) => {
     // console.log(" can i come here ? ", req.user);
     if (!req.user) {
       res.json({
         status: false,
-        message: "没有登录怎么查看"
+        message: '没有登录怎么查看'
       });
       return;
     } else {
       res.json({
         status: true,
-        messae: "不论如何",
+        messae: '不论如何',
         user: req.user
       });
     }
   });
 
-  app.post("/api/auth/register", (req, res) => {
-    console.log(" come here ? ", req.body);
+  app.post('/api/auth/register', (req, res) => {
+    console.log(' come here ? ', req.body);
     let body = req.body;
     User.findOne({ email: body.emai }).then(user => {
       if (user) {
         res.json({
           status: false,
-          message: "该email已经被注册"
+          message: '该email已经被注册'
         });
         return;
       }
@@ -131,14 +137,14 @@ module.exports = app => {
         if (err) {
           res.json({
             status: false,
-            message: "创建用户失败"
+            message: '创建用户失败'
           });
           return;
         }
 
         res.json({
           status: true,
-          message: "创建用户成功"
+          message: '创建用户成功'
         });
       });
     });
