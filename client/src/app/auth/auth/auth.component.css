@@ -1,7 +1,0 @@
-/* This container only show on the login page */
-.container {
-  background-image: url('../../../assets/images/auth-background.svg');
-  background-repeat: no-repeat;
-  background-position: center 110px;
-  background-size: 100%;
-}
