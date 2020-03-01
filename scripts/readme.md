@@ -17,3 +17,8 @@
 
 
 那就一步一个脚印， 从 Life in a box 做起来吧。
+
+
+------
+
+Note: ts-node xxxx.ts
