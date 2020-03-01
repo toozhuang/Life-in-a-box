@@ -27,11 +27,39 @@ const csvFilePath = './data/mymoney.csv';
 
 const ddb = new AWS.DynamoDB();
 
+// const params = {
+//         RequestItems:
+//             {
+//                 'mymoney': {
+//                     Item: {
+//                         'uuid': {S: '001'},
+//                         'CUSTOMER_NAME': {S: 'Richard Roe'}
+//                     }
+//                 }
+//             }
+//     }
+// ;
+
 const params = {
-    TableName: 'mymoney',
-    Item: {
-        'uuid': {S: '001'},
-        'CUSTOMER_NAME': {S: 'Richard Roe'}
+    RequestItems: {
+        'mymoney': [
+            {
+                PutRequest:{
+                    Item: {
+                        'uuid': {S: '001'},
+                        'name': {S: 'Richard Roe'}
+                    }
+                }
+            },
+            {
+                PutRequest:{
+                    Item: {
+                        'uuid': {S: '002'},
+                        'name': {S: '周旺'}
+                    }
+                }
+            }
+        ]
     }
 };
 
@@ -49,7 +77,7 @@ const params = {
  */
 const putData = async (data) => {
     try {
-        const result = await ddb.putItem(data).promise();
+        const result = await ddb.batchWriteItem(data).promise();
         console.log(' resultLLL');
         return result;
     } catch (error) {
@@ -57,9 +85,9 @@ const putData = async (data) => {
     }
 };
 
-putData(params).then(result=>{
+putData(params).then(result => {
     // console.log(result)
-}).catch(error=>{
+}).catch(error => {
     console.log('所以有错误：：： ');
 });
 
