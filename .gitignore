@@ -1,6 +1,7 @@
 node_modules/**
 
 scripts/node_modules/**
+scripts/data/**
 config/dev.js
 
 
