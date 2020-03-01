@@ -10,6 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/async": "^3.0.3",
+    "@types/node": "^13.7.7",
+    "async": "^3.2.0",
+    "aws-sdk": "^2.606.0",
     "csv-parse": "^4.8.3",
     "csvtojson": "^1.1.12",
     "papaparse": "^5.1.1"
