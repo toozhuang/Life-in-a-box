@@ -4,22 +4,13 @@
  * 然后放到数据库
  */
 
-const csv2json=require("csvtojson");
+const csv2json = require("csvtojson");
 
 const csvFilePath = './data/mymoney.csv';
 
 
-const readFile = csv2json()
-    .fromFile(csvFilePath);
-
-readFile.then(value=>console.log(value));
-
-    // .then((jsonObj) => {
-    //     console.log(jsonObj);
-    //     /**
-    //      * [
-    //      *    {a:"1", b:"2", c:"3"},
-    //      *    {a:"4", b:"5". c:"6"}
-    //      * ]
-    //      */
-    // });
+csv2json()
+    .fromFile(csvFilePath,
+        (err, result) => {
+            console.log(result);
+        });

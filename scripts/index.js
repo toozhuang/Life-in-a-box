@@ -4,18 +4,10 @@
  * 然后放到数据库
  */
 
-const csv2json=require("csvtojson");
+const Papa = require("papaparse");
 
 const csvFilePath = './data/mymoney.csv';
 
-csv2json()
-  .fromFile(csvFilePath
-  ,(jsonObj)=>{
-    console.log(jsonObj);
-    /**
-     * [
-     * 	{a:"1", b:"2", c:"3"},
-     * 	{a:"4", b:"5". c:"6"}
-     * ]
-     */
-  });
+Papa.parse(csvFilePath, {delimiter: ","},(err,result)=>{
+  console.log(result);
+});
