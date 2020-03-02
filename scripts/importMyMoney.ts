@@ -28,9 +28,27 @@ const csvFilePath = './data/mymoney.csv';
 // const readCsv = Promise.promisify(csv2json()
 //     .fromFile);
 
+enum MoneyKey{
+    '交易类型'='type',
+    '日期'='createdDate',
+    '类别'='category',
+    '子类别'='sub-category',
+    '项目'='project',
+    '账户'='account',
+    '账户币种'='currency',
+    '金额'='amount',
+    '成员'='member',
+    '商家'='from',
+    '备注'='note',
+    '关联Id'='relatedId'
+}
+
+console.log(MoneyKey['交易类型']);
+
+
 csv2json()
     .fromFile(csvFilePath)
-    .then(value => console.log(value));
+    .then(value => console.log(Object.keys(value[0])));
 
 
 // 下面是主要尝试一下 把 aws - sdk 拿来使用
