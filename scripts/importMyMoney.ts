@@ -3,16 +3,17 @@
  *   功能: 导入随手记账单信息,并把csv转化成json文件
  * 然后放到数据库
  */
+const moment = require("moment");
 
-const csv2json = require("csvtojson");
-const Promise = require("bluebird");
-import * as async from 'async';
+const csv2json = require("csvtojson");      // note 这里倒入的是版本2+的 csvjson
 import * as AWS from 'aws-sdk';
 
 const credentials = new AWS.SharedIniFileCredentials({profile: 'sisi-account'});
 
 AWS.config.credentials = credentials;
 AWS.config.update({region: 'ap-east-1'});
+
+const ddb = new AWS.DynamoDB();
 
 
 const csvFilePath = './data/mymoney.csv';
@@ -28,99 +29,74 @@ const csvFilePath = './data/mymoney.csv';
 // const readCsv = Promise.promisify(csv2json()
 //     .fromFile);
 
-enum MoneyKey{
-    '交易类型'='type',
-    '日期'='createdDate',
-    '类别'='category',
-    '子类别'='sub-category',
-    '项目'='project',
-    '账户'='account',
-    '账户币种'='currency',
-    '金额'='amount',
-    '成员'='member',
-    '商家'='from',
-    '备注'='note',
-    '关联Id'='relatedId'
-}
-
-console.log(MoneyKey['交易类型']);
+const MoneyKey: Array<string> = [
+    'type',
+    'createdDate',
+    'category',
+    'subCategory',
+    'project',
+    'account',
+    'currency',
+    'amount',
+    'member',
+    'from',
+    'note',
+    'relatedId'];
 
 
-csv2json()
+csv2json({noheader: true, nullObject: false})
     .fromFile(csvFilePath)
-    .then(value => console.log(Object.keys(value[0])));
+    .then((value: Array<any>) => {
+        let moneyRecord = [];
+        value.forEach((item, index) => {
+            if (index < 2) {
+                return;
+            } else {
+
+                const singleRecord = {};
+                Object.keys(item).map((key, orderIndex) => {
+                    singleRecord[MoneyKey[orderIndex]] = item[key]
+                        ? item[key] : null;
+                });
+                const dateInUnixString = moment(singleRecord['createdDate']).unix().toString();
+                singleRecord['uuid'] = dateInUnixString;
+                // 日期同样存储为 unix的时间
+                singleRecord['createdDate'] = dateInUnixString;
+                moneyRecord.push(
+                    singleRecord
+                );
+
+            }
+
+        });
 
 
-// 下面是主要尝试一下 把 aws - sdk 拿来使用
-//
-// const ddb = new AWS.DynamoDB();
-//
-// // const params = {
-// //         RequestItems:
-// //             {
-// //                 'mymoney': {
-// //                     Item: {
-// //                         'uuid': {S: '001'},
-// //                         'CUSTOMER_NAME': {S: 'Richard Roe'}
-// //                     }
-// //                 }
-// //             }
-// //     }
-// // ;
-//
-// const params = {
-//     RequestItems: {
-//         'mymoney': [
-//             {
-//                 PutRequest:{
-//                     Item: {
-//                         'uuid': {S: '001'},
-//                         'name': {S: 'Richard Roe'}
-//                     }
-//                 }
-//             },
-//             {
-//                 PutRequest:{
-//                     Item: {
-//                         'uuid': {S: '002'},
-//                         'name': {S: '周旺'}
-//                     }
-//                 }
-//             }
-//         ]
-//     }
-// };
-//
-// // Call DynamoDB to add the item to the table
-// // ddb.putItem(params, function (err, data) {
-// //     if (err) {
-// //         console.log("Error", err);
-// //     } else {
-// //         console.log("Success", data);
-// //     }
-// // });
-// /**
-//  * 下面这个是 用 promise 的方式来解决这个问题
-//  * @param data
-//  */
-// const putData = async (data) => {
-//     try {
-//         const result = await ddb.batchWriteItem(data).promise();
-//         console.log(' resultLLL');
-//         return result;
-//     } catch (error) {
-//         console.log('error: ',);
-//     }
-// };
-//
-// putData(params).then(result => {
-//     // console.log(result)
-// }).catch(error => {
-//     console.log('所以有错误：：： ');
-// });
+        /**
+         * 逐一 把随手记里面的数据发送过去，
+         * 这样的好处是，对于插入操作，更容易debug
+         * 而且每次更新以后的覆盖更加under track
+         */
+        moneyRecord.forEach((record, index) => {
+            const transformRecord = {};
+            Object.keys(record).map(theKey => {
+                transformRecord[theKey] = record[theKey] ? {'S': record[theKey]} : {NULL: true};
+            });
+            const params = {
+                TableName: "mymoney",
+                Item: transformRecord
+            };
 
+            const singlePutPromise = (params) => {
+                return ddb.putItem(params).promise()
+            };
 
+            singlePutPromise(params).then().catch(error => {
+                console.log(index, 'error: ', error,)
+            });
+        });
 
+    })
+;
 
 
 
