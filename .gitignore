@@ -5,6 +5,8 @@ wang-box/node_modules/**
 scripts/data/
 config/dev.js
 
+**/yarn-error.log
+
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
