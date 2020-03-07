@@ -30,7 +30,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,  // 1⃣以tsx结尾的
+        test: /\.tsx?$/,  // 以tsx结尾的
         loader: 'awesome-typescript-loader'
       },
       // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
