@@ -18,9 +18,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: "./src/index.tsx",
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "bundle.js"
+    filename: 'bundle.[hash].js',
+    path: path.join(__dirname, '/dist')
   },
+  // output: {
+  //   path: path.resolve(__dirname, "build"),
+  //   filename: "bundle.js"
+  // },
 
   // adding .ts and .tsx to resolve.extensions will help babel look for .ts and .tsx files to transpile
   resolve: {
