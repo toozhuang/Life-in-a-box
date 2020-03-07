@@ -2,6 +2,7 @@ node_modules/**
 
 scripts/node_modules/**
 wang-box/node_modules/**
+wang-box/build/**
 scripts/data/
 config/dev.js
 
