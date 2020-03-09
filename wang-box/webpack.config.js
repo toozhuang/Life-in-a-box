@@ -18,7 +18,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   entry: "./src/index.tsx",
   output: {
-    filename: 'bundle.[hash].js',
+    // filename: 'bundle.[hash].js',
+    filename: 'bundle.js',
     path: path.join(__dirname, '/dist')
   },
   // output: {
@@ -57,6 +58,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './index.html'
-    })
-  ]
+    }),
+  ],
+  devtool: 'eval-source-map'
 };
