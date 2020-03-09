@@ -18,17 +18,6 @@ const ddb = new AWS.DynamoDB();
 
 const csvFilePath = './data/mymoney.csv';
 
-
-// csv2json()
-//     .fromFile(csvFilePath,
-//         (err, result) => {
-//             console.log(result);
-//         });
-
-//
-// const readCsv = Promise.promisify(csv2json()
-//     .fromFile);
-
 const MoneyKey: Array<string> = [
     'type',
     'createdDate',

@@ -1,4 +1,15 @@
-h1 {
+//import 'antd/dist/antd.css';
+
+// 所以 要有 @import 才可以
+// antdesign mmp
+@import '~antd/dist/antd.css';
+
+div {
   color: red;
   text-align: center;
+
+  .mabi {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }
