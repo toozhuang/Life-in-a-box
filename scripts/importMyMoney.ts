@@ -4,7 +4,7 @@
  * 然后放到数据库
  */
 const moment = require("moment");
-
+const fs = require('fs');
 const csv2json = require("csvtojson");      // note 这里倒入的是版本2+的 csvjson
 import * as AWS from 'aws-sdk';
 
@@ -33,6 +33,21 @@ const MoneyKey: Array<string> = [
     'relatedId'];
 
 
+const writeToJson = (moneyRecord: any[]) => {
+
+
+    const streamFile = fs.createWriteStream('../wang-box/src/mock/data.json');
+
+    streamFile.write('[')
+    moneyRecord.forEach(item => {
+        streamFile.write(JSON.stringify(item));
+        streamFile.write(",");
+    })
+    streamFile.write(']');
+
+    streamFile.end()
+}
+
 csv2json({noheader: true, nullObject: false})
     .fromFile(csvFilePath)
     .then((value: Array<any>) => {
@@ -59,6 +74,10 @@ csv2json({noheader: true, nullObject: false})
 
         });
 
+        console.log(moneyRecord);
+
+        writeToJson(moneyRecord);
+
 
         /**
          * 逐一 把随手记里面的数据发送过去，
@@ -66,6 +85,7 @@ csv2json({noheader: true, nullObject: false})
          * 而且每次更新以后的覆盖更加under track
          */
         moneyRecord.forEach((record, index) => {
+            return;
             const transformRecord = {};
             Object.keys(record).map(theKey => {
                 transformRecord[theKey] = record[theKey] ? {'S': record[theKey]} : {NULL: true};
