@@ -40,7 +40,7 @@ const writeToJson = (moneyRecord: any[]) => {
 
     streamFile.write('[')
     moneyRecord.forEach(item => {
-        streamFile.write(JSON.stringify(item));
+        streamFile.write(JSON.stringify({...item, ...{key: item.uuid}}));
         streamFile.write(",");
     })
     streamFile.write(']');

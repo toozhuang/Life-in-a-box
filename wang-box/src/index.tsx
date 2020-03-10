@@ -6,6 +6,6 @@ import Dashboard from "./containers/mymoney/dashboard/dashboard";
 
 const ROOT = document.querySelector('.container');
 
-ReactDOM.render(<div>
-    <Dashboard color={'blue'}></Dashboard>
+ReactDOM.render(<div className="wang-container">
+    <Dashboard/>
 </div>, ROOT);

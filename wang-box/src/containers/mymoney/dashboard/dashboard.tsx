@@ -1,8 +1,11 @@
 import * as React from 'react';
 import {Table} from "antd";
 
+// @ts-ignore
+import mock from '../../../mock/data.json';
+
 interface IProps {
-    color: string,
+    color?: string,
     size?: string,
 }
 
@@ -16,42 +19,52 @@ class Dashboard extends React.Component<IProps, IState> {
     }
 
 
-    dataSource: { address: string; name: string; key: string; age: number }[] = [
-        {
-            key: '1',
-            name: '胡彦斌',
-            age: 32,
-            address: '西湖区湖底公园1号',
-        },
-        {
-            key: '2',
-            name: '胡彦祖',
-            age: 42,
-            address: '西湖区湖底公园1号',
-        },
-    ];
+    dataSource: any[] = mock
 
 
     columns: { title: string, dataIndex: string, key: string }[] = [
         {
-            title: '姓名',
-            dataIndex: 'name',
-            key: 'name',
+            title: '类型',
+            dataIndex: 'type',
+            key: 'type',
         },
         {
-            title: '年龄',
-            dataIndex: 'age',
-            key: 'age',
+            title: '消费时间',
+            dataIndex: 'createdDate',
+            key: 'createdDate',
         },
         {
-            title: '住址',
-            dataIndex: 'address',
-            key: 'address',
+            title: '类别',
+            dataIndex: 'category',
+            key: 'category'
+        },
+        // todo: 后面可以这两部分合并城一起
+        {
+            title: '二级类别',
+            dataIndex: 'subCategory',
+            key: 'subCategory',
+        },
+        {
+            title: '币种',
+            dataIndex: 'currency',
+            key: 'currency',
+        },
+        {
+            title: '数额',
+            dataIndex: 'amount',
+            key: 'amount',
+        },
+        {
+            title: '备注',
+            dataIndex: 'note',
+            key: 'note',
         },
     ];
 
 
     public render() {
+
+
         return (
             <div><Table dataSource={this.dataSource} columns={this.columns}/></div>
         )
