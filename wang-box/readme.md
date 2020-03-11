@@ -14,3 +14,8 @@ a couple of extra features which TypeScript has.
 花时间看一下 下面几个包的作用
 npm install @babel/core babel-loader @babel/preset-react @babel/preset-typescript @babel/preset-env @babel/plugin-proposal-class-properties @babel/plugin-proposal-object-rest-spread --save-dev
 
+
+研究一下项目中的 filter ，在理解的基础上移植：
+![](https://raw.githubusercontent.com/wangtoday/Picturebed/master/CleanShot 2020-03-11 at 23.26.51.png)
+
+

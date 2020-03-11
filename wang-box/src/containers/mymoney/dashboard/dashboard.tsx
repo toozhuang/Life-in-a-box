@@ -30,8 +30,8 @@ class Dashboard extends React.Component<IProps, IState> {
 
 
     // @ts-ignore
-    handleChange = ({pagination, filters, sorter}: { pagination: any, filters: any, sorter: any }) => {
-
+    handleChange = (pagination, filters, sorter) => {
+        console.log('来了吗：：： ')
         this.setState({
             filteredInfo: filters,
             sortedInfo: sorter,
@@ -108,7 +108,8 @@ class Dashboard extends React.Component<IProps, IState> {
         ];
 
         return (
-            <div><Table onChange={() => this.handleChange} dataSource={this.dataSource} columns={columns}
+            <div><Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
+                        dataSource={this.dataSource} columns={columns}
                         pagination={this.paginationConfig}/>
 
             </div>
