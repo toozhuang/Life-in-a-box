@@ -4,6 +4,7 @@ scripts/node_modules/**
 wang-box/node_modules/**
 wang-box/build/**
 wang-box/dist/**
+wang-box/src/mock/**
 scripts/data/
 config/dev.js
 
