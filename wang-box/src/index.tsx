@@ -13,14 +13,14 @@ import translationMap from "./utils/translationMap";
 
 const ROOT = document.querySelector('.container');
 
-let locale = 'cn';
+let locale = 'zh';
 
 
 ReactDOM.render(
     // <ConfigProvider locale={zhCN}>
     <div>
         <Button onClick={() => {
-            locale = locale === 'cn' ? 'en' : 'cn'
+            locale = locale === 'zh' ? 'en' : 'zh'
             console.log('点击了吗？ ', locale)
         }}>切换语言</Button>
         // @ts-ignore

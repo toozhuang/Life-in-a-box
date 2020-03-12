@@ -10,7 +10,7 @@ export default {
         'money.dashboard.amount': '数额',
         'money.dashboard.note': '备注',
     },
-    cn: {
+    zh: {
         'money.dashboard.type': '支出/收入',
         'money.dashboard.createdDate': '记录时间',
         'money.dashboard.category': '类别',
