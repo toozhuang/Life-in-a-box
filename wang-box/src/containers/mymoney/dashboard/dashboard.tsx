@@ -2,6 +2,8 @@ import * as React from 'react';
 import {Table} from "antd";
 import * as moment from 'moment'
 
+import {injectIntl} from 'react-intl';
+
 // @ts-ignore
 import mock from '../../../mock/data.json';
 
@@ -25,13 +27,12 @@ class Dashboard extends React.Component<IProps, IState> {
     dataSource: any[] = mock;
 
     componentDidMount(): void {
-
+        console.log(navigator);
     }
 
 
     // @ts-ignore
     handleChange = (pagination, filters, sorter) => {
-        console.log('来了吗：：： ')
         this.setState({
             filteredInfo: filters,
             sortedInfo: sorter,
@@ -47,17 +48,21 @@ class Dashboard extends React.Component<IProps, IState> {
 
     public render() {
 
+        const {
+            // @ts-ignore
+            intl: {formatMessage},
+        } = this.props;
 
         let {sortedInfo, filteredInfo}: any = this.state;
         sortedInfo = sortedInfo || {};
         filteredInfo = filteredInfo || {};
 
 
-        //{ title: string, dataIndex: string, key: string,width?: number}[]
 
         const columns = [
             {
-                title: '类型',
+                title:
+                    formatMessage({id: 'money.dashboard.type'}),
                 dataIndex: 'type',
                 key: 'type',
                 filters: [
@@ -69,7 +74,7 @@ class Dashboard extends React.Component<IProps, IState> {
                 ellipsis: true,
             },
             {
-                title: '消费时间',
+                title: formatMessage({id: 'money.dashboard.createdDate'}),
                 dataIndex: 'createdDate',
                 key: 'createdDate',
                 render: (createDate: string) => {
@@ -77,30 +82,30 @@ class Dashboard extends React.Component<IProps, IState> {
                 }
             },
             {
-                title: '类别',
+                title: formatMessage({id: 'money.dashboard.category'}),
                 dataIndex: 'category',
                 key: 'category'
             },
             // todo: 后面可以这两部分合并城一起
             {
-                title: '二级类别',
+                title: formatMessage({id: 'money.dashboard.subCategory'}),
                 dataIndex: 'subCategory',
                 key: 'subCategory',
             },
             {
-                title: '币种',
+                title: formatMessage({id: 'money.dashboard.currency'}),
                 dataIndex: 'currency',
                 key: 'currency',
             },
             {
-                title: '数额',
+                title: formatMessage({id: 'money.dashboard.amount'}),
                 dataIndex: 'amount',
                 key: 'amount',
                 sorter: (a: any, b: any) => a.amount - b.amount,
                 sortOrder: sortedInfo.columnKey === 'amount' && sortedInfo.order,
             },
             {
-                title: '备注',
+                title: formatMessage({id: 'money.dashboard.note'}),
                 dataIndex: 'note',
                 width: 300,
                 key: 'note',
@@ -108,13 +113,15 @@ class Dashboard extends React.Component<IProps, IState> {
         ];
 
         return (
-            <div><Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
-                        dataSource={this.dataSource} columns={columns}
-                        pagination={this.paginationConfig}/>
+            <div>
+                <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
+                       dataSource={this.dataSource} columns={columns}
+                       pagination={this.paginationConfig}/>
 
             </div>
         )
     }
 }
 
-export default Dashboard;
+// @ts-ignore
+export default injectIntl(Dashboard);
