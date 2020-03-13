@@ -3,8 +3,6 @@ import {Table} from "antd";
 import * as moment from 'moment'
 
 import {injectIntl} from 'react-intl';
-
-// @ts-ignore
 import mock from '../../../mock/data.json';
 
 interface IProps {

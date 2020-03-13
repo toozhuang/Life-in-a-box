@@ -1,6 +1,4 @@
-// @flow
-
-export default {
+export const translationMap: { [key: string]: any; } = {
     en: {
         'money.dashboard.type': '支出/收入',
         'money.dashboard.createdDate': '消费时间',

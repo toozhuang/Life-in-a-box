@@ -1,15 +1,23 @@
 import {Button} from "antd";
 import {IntlProvider} from "react-intl";
-import translationMap from "../utils/translationMap";
+import {translationMap} from "../utils/translationMap";
 
 import * as React from "react";
 import Dashboard from "./mymoney/dashboard/dashboard";
 
+interface IProps {
+
+}
+
+interface IState {
+    locale: string
+}
+
 
 class App extends React.Component<IProps, IState> {
 
-    constructor() {
-        super();
+    constructor(props:IProps) {
+        super(props);
         this.state = {
             locale: 'zh'
         }
@@ -26,18 +34,20 @@ class App extends React.Component<IProps, IState> {
         this.setState({locale: hh_locale});
     }
 
+    translationMap = (locale:string) => translationMap[locale];
+
     render() {
         const {locale} = this.state;
 
-        return <div>
+        let div = <div>
             <Button onClick={() => {
                 this.localeChange()
             }}>切换语言</Button>
-            // @ts-ignore
-            <IntlProvider locale={locale} messages={translationMap[locale]}>
+            <IntlProvider locale={locale} messages={this.translationMap((locale))}>
                 <Dashboard/>
             </IntlProvider>
-        </div>
+        </div>;
+        return div
     }
 }
 
