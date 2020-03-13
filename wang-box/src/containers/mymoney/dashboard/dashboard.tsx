@@ -4,6 +4,7 @@ import * as moment from 'moment'
 
 import {injectIntl} from 'react-intl';
 import mock from '../../../mock/data.json';
+import { FilterMessage } from "../../../components/views/index.js";
 
 interface IProps {
     color?: string,
@@ -54,7 +55,6 @@ class Dashboard extends React.Component<IProps, IState> {
         let {sortedInfo, filteredInfo}: any = this.state;
         sortedInfo = sortedInfo || {};
         filteredInfo = filteredInfo || {};
-
 
 
         const columns = [
@@ -112,6 +112,7 @@ class Dashboard extends React.Component<IProps, IState> {
 
         return (
             <div>
+                <FilterMessage/>
                 <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
                        dataSource={this.dataSource} columns={columns}
                        pagination={this.paginationConfig}/>
