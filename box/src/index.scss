@@ -1,0 +1,26 @@
+@import '~antd/dist/antd.css';
+
+
+#root {
+  height: 100vh;
+}
+
+.App {
+  text-align: center;
+}
+
+.ant-layout {
+  height: 100%;
+}
+
+.ant-layout-header {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.ant-layout-header, .ant-layout-content {
+  background: white;
+}
+
+
