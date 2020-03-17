@@ -19,6 +19,7 @@ import './App.css'
 // todo: 后续能不能用@XXX 直接这样代替呢?
 import {AppRoutes} from "./constants/app_route";
 import {SetPanel} from "./containers/box_setting/set_panel";
+import CommonTopbar from "./unit/common_top_bar";
 
 
 const {Header, Sider, Content} = Layout;
@@ -96,7 +97,7 @@ class App extends React.Component<any, any> {
                 </Sider>
                 <Layout className="site-layout">
                     <Header className="site-layout-background">
-
+                        <CommonTopbar />
                     </Header>
                     <Content
                         className="site-layout-background"
