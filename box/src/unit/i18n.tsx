@@ -1,1 +1,1 @@
-// import {withState,compose,lifecycle,branch,renderNothing} from 'recompose';
+export const big = 'nothing';

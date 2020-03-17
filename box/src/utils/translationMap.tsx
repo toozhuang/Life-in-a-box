@@ -9,6 +9,7 @@ export const translationMap: { [key: string]: any; } = {
         'money.dashboard.note': '备注',
     },
     zh: {
+        'route.money.dashboard':'路由 - Dashboard',
         'money.dashboard.type': '支出/收入',
         'money.dashboard.createdDate': '记录时间',
         'money.dashboard.category': '类别',
