@@ -26,7 +26,7 @@ interface IState {
     dataSource: any[] = mock;
 
     componentDidMount(): void {
-        console.log(navigator);
+
     }
 
 

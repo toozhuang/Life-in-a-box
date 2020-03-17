@@ -9,7 +9,7 @@ export const translationMap: { [key: string]: any; } = {
         'money.dashboard.note': '备注',
     },
     zh: {
-        'route.money.dashboard':'路由 - Dashboard',
+        'route.money.dashboard':'Dashboard',
         'money.dashboard.type': '支出/收入',
         'money.dashboard.createdDate': '记录时间',
         'money.dashboard.category': '类别',
@@ -17,6 +17,8 @@ export const translationMap: { [key: string]: any; } = {
         'money.dashboard.currency': '币种',
         'money.dashboard.amount': '数额',
         'money.dashboard.note': '备注',
+
+        'route.box.setting':'设置',
 
         //    filter part
         'filter.emptyText': '无筛选条件',
