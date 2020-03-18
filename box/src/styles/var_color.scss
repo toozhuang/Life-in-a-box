@@ -1,0 +1,192 @@
+
+
+$white: #fff;
+$black: #303030;
+$warm-grey: #909090;
+$blue-grey: #606060;
+$grey:$warm-grey;
+$light-warm-grey: #c7c7c7; // $warm-grey(#909090)加 50%透明度
+$pinkish-grey: $light-warm-grey;
+$dark-grey: #dedede;
+$pale-grey: #e8e8e8;
+$white-grey: #eee; // 编辑器按钮背景
+$greyish-white:#f8f8f8;
+$greyish-white-50-percent:#fbfbfb;
+$black-topbar: #373a3d;
+
+$transparent: rgba(0, 0, 0, 0);
+$blue: #338fe5;
+$light-warm-blue: #64aaeb;
+$blue-3-percent: #f9fbfe;
+$blue-5-percent: #f5f9fd;
+$blue-10-percent: #e1edfa;
+$blue-20-percent: #eaf3fc;
+$blue-20-percent-progress: #359be7;
+$pale-grey-50-percent: #f3f3f3;
+$warm-grey-50-percent: rgba(144, 144, 144, 0.5);
+$blue-30-percent: rgba(51, 143, 229, 0.03);
+$blue-50-percent: #96c5f2;
+$dark-sky-blue: #307fe2;
+
+$red:#ea0d0d;
+$light-red: #e52727;
+$red-25-percent: #e72a2a;
+
+$yellow: #f0a100;
+
+$green: #24b47e;
+$green-5-percent: #f4fbf8;
+$green-10-percent: #dff3eb;
+$green-20-percent: #e9f7f2;
+
+
+//$blue-dark:#0c1a37;
+$blue-dark: $black;
+$orange: #e39f48;
+$light-blue: #f3f9ff;
+$marigold: #fef8eb;
+
+$tips-color: $warm-grey;
+
+// ============ 2.0.0 ==============
+
+$background-color: $greyish-white;
+$table-head-background-color: $greyish-white;
+$border-color: $dark-grey;
+$light-border-color: $pale-grey;
+$base-font-color: $black;
+
+// ============= 3.0.0 ============
+$top-bar-background: $white;
+$left-nav-background: #2c2f31;
+$kanban-background: $white-grey;
+
+
+
+$input-color-map: (
+        normal: rgba(134, 147, 160, 0.5),
+        hover: $blue,
+        active: $blue,
+);
+
+// 灰色图标链接
+$grey-color-map: (
+        normal: $black,
+        hover: rgba($black, 0.5),
+        active: rgba($black, 0.5)
+);
+
+// 灰色图标链接
+$blue-grey-color-map: (
+        normal: $blue-grey,
+        hover: rgba($blue-grey, 0.5),
+        active: rgba($blue-grey, 0.5)
+);
+
+//按钮颜色组
+$blue-color-map: (
+        normal: $blue,
+        hover: #49a9eb,
+        active: #2d73b5,
+);
+
+
+$red-color-map: (
+        normal: $red,
+        hover: mix(rgba($white,0.3),$red),
+        active: mix(rgba($black,0.6),$red),
+);
+
+$green-color-map: (
+        normal: $green,
+        hover: mix(rgba($white,0.5),$green),
+        active: mix(rgba($black,0.6),$green),
+
+);
+
+$orange-color-map: (
+        normal: $orange,
+        hover: mix(rgba($white,0.5),$orange),
+        active: mix(rgba($black,0.6),$orange),
+
+);
+
+$yellow-color-map: (
+        normal: $yellow,
+        hover: mix(rgba($white,0.5),$yellow),
+        active: mix(rgba($black,0.6),$yellow),
+);
+
+$normal-shadow-map: (
+        normal: (0 4px 6px 0 rgba(0, 62, 118, 0.05), 0 0 2px 0 rgba(0, 62, 118, 0.2)),
+        hover: (0 4px 12px 0 rgba(0, 62, 118, 0.05), 0 2px 4px 0 rgba(0, 62, 118, 0.1)),
+        active: (0 2px 6px 0 rgba(0, 62, 118, 0.05), 0 1px 2px 0 rgba(0, 62, 118, 0.2))
+);
+
+
+$normal-button-color-map: (
+        font: (
+                normal: $blue-grey,
+                hover: $blue,
+                active: rgba($blue, 0.7),
+        ),
+        button-color: (
+                normal: $white,
+                hover: $white,
+                active: $white,
+        ),
+        shadow: $normal-shadow-map
+);
+$color-group-map: (
+        blue: $blue-color-map,
+        red: $red-color-map,
+        green: $green-color-map,
+        orange: $orange-color-map,
+        yellow: $yellow-color-map,
+        input: $input-color-map,
+        grey: $grey-color-map,
+        blue-grey: $blue-grey-color-map
+);
+
+$blue-button-color-map: (
+        font:(
+                normal: $white,
+                hover: $white,
+                active: $white
+        ),
+        button-color: map-get($color-group-map, blue),
+        shadow: $normal-shadow-map
+);
+$red-button-color-map: (
+        font:(
+                normal: $white,
+                hover: $white,
+                active: $white
+        ),
+        button-color: map-get($color-group-map, red),
+        shadow: $normal-shadow-map
+);
+
+
+$green-button-color-map:(
+        font:(
+                normal:$white,
+                hover:$white,
+                active:$white
+        ),
+        button-color:map-get($color-group-map,green),
+        shadow:$normal-shadow-map
+);
+
+$button-group-map:(
+        normal:$normal-button-color-map,
+        blue:$blue-button-color-map,
+        red:$red-button-color-map,
+        green:$green-button-color-map,
+);
+
+$placeholder-font-color: $warm-grey;
+$input-text-border-color: #b7bdc0;
+
+$content-bg-color: $white;
+$dialog-background-color: $white;

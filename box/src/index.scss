@@ -1,5 +1,6 @@
 @import '~antd/dist/antd.css';
 
+@import "./styles/var_color";
 
 #root {
   height: 100vh;
@@ -14,8 +15,7 @@
 }
 
 .ant-layout-header {
-  display: flex;
-  align-items: center;
+  height: auto;
   padding-left: 20px;
 }
 
@@ -24,3 +24,13 @@
 }
 
 
+// 下面是一些全局的变量
+
+body {
+  font-family: PingFang SC, "\5FAE\8F6F\96C5\9ED1", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  color: #303030;
+  line-height: 1.5;
+}

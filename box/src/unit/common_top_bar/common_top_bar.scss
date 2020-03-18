@@ -1,0 +1,15 @@
+
+@import "styles/var_color";
+
+.common-topbar-with-tab {
+  height: 48px;
+  overflow: unset;
+  line-height: 1.5;
+}
+
+.topbar {
+  background:$top-bar-background;
+  //$top-bar-background;
+  //color:$blue-grey;
+  //padding-right: $big-padding;
+}

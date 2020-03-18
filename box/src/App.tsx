@@ -15,7 +15,7 @@ import {
 import {Dashboard} from "./containers/mymoney/";
 
 
-import './App.css'
+import './App.scss'
 
 // todo: 后续能不能用@XXX 直接这样代替呢?
 import {AppRoutes} from "./constants/app_route";
