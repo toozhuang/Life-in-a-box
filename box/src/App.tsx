@@ -3,6 +3,7 @@ import {compose} from 'recompose';
 import {
     Route,
     withRouter,
+    Redirect,
 } from 'react-router-dom';
 import {injectIntl} from 'react-intl';
 
@@ -97,7 +98,7 @@ class App extends React.Component<any, any> {
                 </Sider>
                 <Layout className="site-layout">
                     <Header className="site-layout-background">
-                        <CommonTopbar />
+                        <CommonTopbar/>
                     </Header>
                     <Content
                         className="site-layout-background"
@@ -107,7 +108,7 @@ class App extends React.Component<any, any> {
                             minHeight: 280,
                         }}
                     >
-                        {/*<switch>*/}
+
                         {this.appRouteSetting().map(routeSetting => (
                             <Route
                                 id={routeSetting.key}
@@ -117,8 +118,7 @@ class App extends React.Component<any, any> {
                             />
                         ))
                         }
-                        {/*<Redirect to={AppRoutes.DASHBOARD}/>*/}
-                        {/*</switch>*/}
+                        <Redirect to={AppRoutes.DASHBOARD}/>
 
                     </Content>
                 </Layout>
