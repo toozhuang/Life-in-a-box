@@ -1,0 +1,53 @@
+@import "./var";
+
+
+
+
+@mixin text(
+  $font-size:$base-font-size,
+  $font-color:$base-font-color
+){
+  font-size: $font-size;
+  color: $font-color;
+}
+
+@mixin bold-text(
+  $font-size:$base-font-size,
+  $font-color:$base-font-color
+){
+  @include text($font-size,$font-color);
+  font-weight: $head-font-weight;
+}
+
+@mixin link($colorMap:none){
+  cursor: pointer;
+  @if($colorMap == none){
+    color:$blue;
+    &:hover{
+      color:$black;
+    }
+  }@else {
+    $color:map-get($color-group-map,$colorMap);
+    color : map-get($color,normal);
+    &:hover{
+      color:map-get($color,hover);
+    }
+  }
+}
+
+@mixin icon-link($colorMap:blue){
+  cursor: pointer;
+  $color:map-get($color-group-map,$colorMap);
+  transition: color $transition-timer;
+  color: $black;
+  &:hover{
+    color:map-get($color,normal);
+  }
+  &-disabled {
+    cursor: not-allowed;
+    color: $warm-grey;
+    &:hover {
+      color: $warm-grey;
+    }
+  }
+}

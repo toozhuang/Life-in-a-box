@@ -1,0 +1,158 @@
+/**
+* 所有几何大小相关的变量，都放在这个文件。
+*/
+$padding-unit: 5px; // Ant Design是用4，所以如果看见Antd是16px的话，对应我们这边用
+                    // 4 * padding-unit -> $big-padding
+$huge-padding: 6 * $padding-unit;
+$large-padding: 5 * $padding-unit;
+$big-padding: 4 * $padding-unit;
+$normal-padding: 3 * $padding-unit;
+$small-padding: 2 * $padding-unit;
+$tiny-padding: $padding-unit;
+
+
+// list-height
+$tiny-list-height: 30px;
+$small-list-height: 40px;
+$medium-list-height: 42px;
+$list-height: 48px;
+$big-list-height: 48px;
+
+$old-task-list-item-height: 48px;
+
+$no-border-list-height:34px;
+
+$menu-popover-max-height:420px;
+
+$small-head-height: 48px;
+$head-height: 60px;
+
+// avatar
+$tiny-avatar-radius: 16px;
+$small-avatar-radius: 30px;
+$right-panel-avatar-radius: 44px;
+$normal-avatar-radius: 50px;
+$big-avatar-radius: 100px;
+$huge-avatar-radius: 200px;
+
+//input-size
+$small-input-height: 26px; // 编辑器链接弹窗对话框里用到
+$normal-input-height:30px;
+$normal-input-width:300px;
+$big-input-height:50px;
+//button-size
+
+$small-button-height:26px;
+
+
+
+
+$big-button-padding-lr: 20px;
+$big-button-padding-tb: 13px;
+
+$middle-button-padding-lr: 15px;
+$middle-button-padding-tb: 9px;
+
+$small-rect-button:(
+  left-right-padding:10px,
+  height:$small-button-height,
+  line-height:$small-button-height
+);
+
+$middle-rect-button:(
+  left-right-padding:15px,
+  height:$normal-input-height,
+  line-height:$normal-input-height
+);
+
+
+$big-rect-button:(
+    left-right-padding:20px,
+    height:$big-input-height,
+    line-height:$big-input-height
+);
+
+$rect-button-size-map :(
+  small:$small-rect-button,
+  middle:$middle-rect-button,
+  big:$big-rect-button
+);
+
+$rect-border-radius: 3px;
+
+
+// icon
+
+$tag-height:20px;
+
+$select-arrow-size: 8px;
+
+$tiny-icon-size:(
+  icon-size: 12px,
+  icon-padding: 6px,
+  icon-fullsize: 24px
+);
+
+$small-icon-size:(
+  icon-size: 16px,
+  icon-padding: 7px,
+  icon-fullsize: 30px
+);
+
+
+$normal-icon-size:(
+  icon-size: 16px,
+  icon-padding: 14px,
+  icon-fullsize: 44px
+);
+
+$big-icon-size:(
+  icon-size: 24px,
+  icon-padding: 10px,
+  icon-fullsize: 44px
+);
+
+$icon-size-map:(
+  tiny:$tiny-icon-size,
+  small:$small-icon-size,
+  normal:$normal-icon-size,
+  big:$big-icon-size
+);
+
+
+
+
+
+
+$tiny-icon-size: 12px;
+$tiny-icon-padding: 6px;
+$tiny-icon-fullsize: 24px;
+
+$small-icon-size: 14px;
+$small-icon-padding: 8px;
+$small-icon-fullsize: $small-icon-size+2*$small-icon-padding;
+
+$normal-icon-size: 16px;
+$normal-icon-padding: 14px;
+$normal-icon-fullsize: $normal-icon-size+2*$normal-icon-padding;
+
+$middle-icon-size: 24px;
+$big-icon-width: 32px;
+$huge-icon-size: 48px;
+
+/** deprecated **/
+$icon-size: $normal-icon-size;
+
+// ========= 2.0.0 ===========
+$big-height: 60px; // for big section header, panel headers
+$list-height: 48px;
+$border-radius: 3px;
+$small-border-radius: 2px;
+$font-tag-height: 20px;
+
+// for topbar/footer
+$big-bar-height: 48px;
+
+//dialog
+
+$normal-edit-dialog-width:8*$normal-input-height + 7*$big-padding;

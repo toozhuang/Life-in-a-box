@@ -33,6 +33,10 @@ class CommonTopbar extends React.PureComponent<PropsType> {
         [AppRoutes.DASHBOARD]: {
             className: 'money-topbar',
             product: 'Money Record',
+        },
+        [AppRoutes.SETTING]: {
+            className: 'money-topbar',
+            product: 'Setting',
         }
     };
 
@@ -58,8 +62,9 @@ class CommonTopbar extends React.PureComponent<PropsType> {
     };
 
     render() {
-        const routeSettingPaths: string[] = Object.keys(CommonTopbar.routeSetting);
 
+        const routeSettingPaths: string[] = Object.keys(CommonTopbar.routeSetting);
+        console.log('按照我的理解应该这里会有啊: ', routeSettingPaths)
         return (
             <Switch>
                 {

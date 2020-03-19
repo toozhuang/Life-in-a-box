@@ -3,14 +3,9 @@
 // 所以 要有 @import 才可以
 // antdesign mmp
 @import '~antd/dist/antd.css';
+@import "var_color";
+@import "var_layout";
+@import "var_size";
+@import "var_font";
+@import "./themes/mixin_font";
 
-.wang-container {
-  margin-left: 50px;
-  margin-right: 50px;
-  border: 1px solid lightgray;
-  margin-top: 10px;
-  border-radius: 5px;
-  font-size: 15px;
-  font-family: sans-serif;
-
-}

@@ -1,0 +1,26 @@
+/**
+*  除颜色、大小以外，其它的变量放在此文件。
+*/
+@import "../var_size";
+@import "../var_color";
+@import "../var_font";
+
+
+// image-url
+//$image-base-url: "../images/";
+
+// time
+
+$animation-duration: 0.2s;
+$long-animation-duration: 0.3s;
+/**
+ * 已过期，新加的代码不是再用
+ */
+$transition-timer: $animation-duration;
+
+// radius
+$global-radius: 3px;
+
+// z-index
+$high-z-index: 1000;
+$highest-z-index: 3000;

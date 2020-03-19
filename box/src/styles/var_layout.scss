@@ -1,0 +1,12 @@
+$body-min-width : 1280px;
+$body-min-height : 600px;
+$center-main-width: 1000px;
+$top-height : 48px;
+$left-width : 230px;
+$right-width:460px;
+$setting-main-min-width:666px;
+$setting-main-max-width:1200px;
+$setting-right-padding : $body-min-width - $setting-main-min-width - $left-width;
+$split-point-for-center-change : $setting-main-max-width + $left-width + $setting-right-padding;
+$split-point-for-right-change : $setting-main-max-width + $left-width * 2;
+

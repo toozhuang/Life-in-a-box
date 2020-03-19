@@ -1,15 +1,38 @@
-
-@import "styles/var_color";
+@import "styles/index";
 
 .common-topbar-with-tab {
   height: 48px;
+  min-height: 48px;
   overflow: unset;
   line-height: 1.5;
+
+  display: flex;
 }
 
 .topbar {
-  background:$top-bar-background;
-  //$top-bar-background;
-  //color:$blue-grey;
-  //padding-right: $big-padding;
+  background: $top-bar-background;
+  color: $blue-grey;
+  padding-right: $big-padding;
+
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px 0 #d3d3d3;
+  position: relative;
+  z-index: 1;
+
+  .left {
+    flex: 0 0 auto;
+    line-height: $top-height;
+    display: flex;
+    align-items: center;
+
+    .topbar-product-name {
+      @include bold-text($big-font-size, $blue-grey);
+      margin-right: $big-padding;
+      vertical-align: middle;
+      font-family: markpro;
+      margin-left: $big-padding;
+    }
+  }
 }

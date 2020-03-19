@@ -97,9 +97,9 @@ class App extends React.Component<any, any> {
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header className="site-layout-background">
-                        <CommonTopbar/>
-                    </Header>
+
+                    <CommonTopbar/>
+
                     <Content
                         className="site-layout-background"
                         style={{
