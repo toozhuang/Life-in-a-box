@@ -15,15 +15,14 @@ import {
 import {Dashboard} from "./containers/mymoney/";
 
 
-import './App.scss'
 
-// todo: 后续能不能用@XXX 直接这样代替呢?
 import {AppRoutes} from "./constants/app_route";
 import {SetPanel} from "./containers/box_setting/set_panel";
 import CommonTopbar from "./unit/common_top_bar";
 
+import './App.scss'
 
-const {Header, Sider, Content} = Layout;
+const { Sider, Content} = Layout;
 
 class App extends React.Component<any, any> {
 

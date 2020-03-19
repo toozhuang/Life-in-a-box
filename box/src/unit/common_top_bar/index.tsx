@@ -4,6 +4,7 @@ import React from "react";
 import {AppRoutes} from "../../constants/app_route";
 import {EventEmitter} from "events";
 import TopbarWithTabs from "./topbar_with_tab";
+import MoneyTopBarTabs from "components/component/money_topbar_tabs";
 
 
 type PathParamsType = {
@@ -19,7 +20,8 @@ type routingType = {
     [propName: string]: {
         className: string,
         product: string
-        customRender?: any
+        centerRenderer?: any
+        customRender?:any
     }
 }
 
@@ -33,6 +35,7 @@ class CommonTopbar extends React.PureComponent<PropsType> {
         [AppRoutes.DASHBOARD]: {
             className: 'money-topbar',
             product: 'Money Record',
+            centerRenderer: () => <MoneyTopBarTabs/>
         },
         [AppRoutes.SETTING]: {
             className: 'money-topbar',
