@@ -1,10 +1,15 @@
 import * as React from 'react';
-import {Table} from "antd";
+import {Table, Button} from "antd";
 import * as moment from 'moment'
-
 import {injectIntl} from 'react-intl';
 import mock from '../../../mock/data.json';
 // import { FilterMessage } from "../../../components/views/index.js";
+
+
+import AddRecordDialog from '../add_record/add_record_dialog';
+
+
+import './dashboard.scss'
 
 interface IProps {
     color?: string,
@@ -14,19 +19,25 @@ interface IProps {
 interface IState {
     filteredInfo: any,
     sortedInfo: any,
+    visible: boolean
 }
 
- class DashboardComp extends React.Component<IProps, IState> {
+class DashboardComp extends React.Component<IProps, IState> {
     public state = {
         filteredInfo: null,
         sortedInfo: null,
+        visible: false,
     }
 
 
     dataSource: any[] = mock;
 
     componentDidMount(): void {
-
+        this.state = {
+            visible: false,
+            filteredInfo: null,
+            sortedInfo: null,
+        }
     }
 
 
@@ -41,9 +52,13 @@ interface IState {
 
     paginationConfig: any = {
         position: 'bottom',
-        defaultPageSize: 20
+        defaultPageSize: 10
     }
 
+
+    toggleDialog = (status: boolean) => {
+        this.setState({visible: status});
+    }
 
     public render() {
 
@@ -112,6 +127,9 @@ interface IState {
 
         return (
             <div>
+                <Button type="primary" className="add-btn"
+                        onClick={() => this.toggleDialog(!this.state.visible)}>Primary</Button>
+                <AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}/>
                 {/*<FilterMessage/>*/}
                 <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
                        dataSource={this.dataSource} columns={columns}
@@ -123,4 +141,4 @@ interface IState {
 }
 
 // @ts-ignore
-export const Dashboard =  injectIntl(DashboardComp);
+export const Dashboard = injectIntl(DashboardComp);
