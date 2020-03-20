@@ -19,6 +19,7 @@ export const translationMap: { [key: string]: any; } = {
         'money.dashboard.note': '备注',
 
         'route.box.setting':'设置',
+        "money.dashboard.dialog.title":'添加记录',
 
         //    filter part
         'filter.emptyText': '无筛选条件',

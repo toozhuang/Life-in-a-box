@@ -6,10 +6,9 @@
 
 import React from 'react';
 import classnames from 'classnames';
-import {noop, get} from 'lodash-es';
+import { get} from 'lodash-es';
 
 import './foldable_tabs.scss';
-import {act} from "react-dom/test-utils";
 
 
 interface Itab {
@@ -94,7 +93,8 @@ export class FoldableTabs extends React.PureComponent<IProps, any> {
 
     tabRenderer = (tab: Itab) => {
         return (
-            <a>
+            // todo: 后面要把这个改成可跳转的
+            <a href={'#'}>
                 <span>{tab.label}</span></a>
         )
     }
@@ -145,8 +145,8 @@ export class FoldableTabs extends React.PureComponent<IProps, any> {
 
 
 // todo note 后面后续会根据这个标题栏的要求而扩展这部分的功能
-class BaseUrlFoldableTabs extends React.PureComponent {
-    componentDidMount(): void {
-        // this.
-    }
-}
+// class BaseUrlFoldableTabs extends React.PureComponent {
+//     componentDidMount(): void {
+//         // this.
+//     }
+// }

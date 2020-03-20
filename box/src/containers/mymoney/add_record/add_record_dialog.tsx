@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import {Modal, Button} from 'antd';
 
-class App extends React.Component<any, any> {
+
+class AddRecordDialog extends React.Component<any, any> {
     state = {
         ModalText: 'Content of the modal',
         visible: false,
@@ -35,11 +36,17 @@ class App extends React.Component<any, any> {
     };
 
     render() {
+
+        const {
+            formatMessage,
+            visible,
+        } = this.props;
+
         const {confirmLoading, ModalText} = this.state;
-        const {visible} = this.props;
+
         return (
             <Modal
-                title="Title"
+                title={formatMessage({id: 'money.dashboard.dialog.title'})}
                 visible={visible}
                 onOk={this.handleOk}
                 confirmLoading={confirmLoading}
@@ -51,4 +58,4 @@ class App extends React.Component<any, any> {
     }
 }
 
-export default App;
+export default AddRecordDialog;

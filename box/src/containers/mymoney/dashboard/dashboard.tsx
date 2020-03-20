@@ -6,7 +6,7 @@ import mock from '../../../mock/data.json';
 // import { FilterMessage } from "../../../components/views/index.js";
 
 
-import AddRecordDialog from '../add_record/add_record_dialog';
+// import AddRecordDialog from '../add_record/add_record_dialog';
 
 
 import './dashboard.scss'
@@ -23,6 +23,19 @@ interface IState {
 }
 
 class DashboardComp extends React.Component<IProps, IState> {
+
+    // @ts-ignore
+    constructor(...args) {
+        // @ts-ignore
+        super(...args);
+        this.state = {
+            filteredInfo: null,
+            sortedInfo: null,
+            visible: false,
+        }
+    }
+
+
     public state = {
         filteredInfo: null,
         sortedInfo: null,
@@ -33,11 +46,7 @@ class DashboardComp extends React.Component<IProps, IState> {
     dataSource: any[] = mock;
 
     componentDidMount(): void {
-        this.state = {
-            visible: false,
-            filteredInfo: null,
-            sortedInfo: null,
-        }
+
     }
 
 
@@ -53,12 +62,12 @@ class DashboardComp extends React.Component<IProps, IState> {
     paginationConfig: any = {
         position: 'bottom',
         defaultPageSize: 10
-    }
+    };
 
 
     toggleDialog = (status: boolean) => {
         this.setState({visible: status});
-    }
+    };
 
     public render() {
 
@@ -127,9 +136,10 @@ class DashboardComp extends React.Component<IProps, IState> {
 
         return (
             <div>
-                <Button type="primary" className="add-btn"
-                        onClick={() => this.toggleDialog(!this.state.visible)}>Primary</Button>
-                <AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}/>
+                {/*<Button type="primary" className="add-btn"*/}
+                {/*        onClick={() => this.toggleDialog(!this.state.visible)}>Primary</Button>*/}
+                {/*<AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}*/}
+                {/*                 formatMessage={formatMessage}/>*/}
                 {/*<FilterMessage/>*/}
                 <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
                        dataSource={this.dataSource} columns={columns}
