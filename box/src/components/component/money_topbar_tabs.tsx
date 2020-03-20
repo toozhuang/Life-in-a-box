@@ -7,12 +7,18 @@
 
 
 import React from "react";
+import {withRouter} from 'react-router-dom'
+import {compose} from "recompose";
+
+
 import {AppRoutes} from "../../constants/app_route";
 
-class MoneyTopBarTabs extends React.PureComponent {
+import {FoldableTabs} from "../../widgets/layout/foldable_tabs";
+
+class MoneyTopBarTabs extends React.PureComponent<any, any> {
 
 
-    moneyRootRoute:any = {
+    moneyRootRoute: any = {
         key: 'records',
         path: AppRoutes.DASHBOARD,
         label: '流水',
@@ -35,10 +41,16 @@ class MoneyTopBarTabs extends React.PureComponent {
     };
 
 
+
     render() {
         console.log(this.buildTabs())
-        return <div>hahah</div>
+        return (<FoldableTabs
+            className="money-topbar-tabs"
+            tabs={this.buildTabs()}
+            history={this.props.history}
+
+        />)
     }
 }
 
-export default MoneyTopBarTabs;
+export default compose(withRouter)(MoneyTopBarTabs);

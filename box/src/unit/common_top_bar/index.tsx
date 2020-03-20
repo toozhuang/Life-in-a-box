@@ -1,3 +1,11 @@
+/***
+ * common top bar
+ * 主要的职责并不是设置tab bar
+ * 而是 根据 当前的路由, 来决定我们在该路由下
+ * 显示什么样的 tab bar
+ * 所有 才会有 static routeSetting
+ */
+
 import {withRouter, Switch, Route} from "react-router-dom";
 import {RouteComponentProps} from "react-router";
 import React from "react";
