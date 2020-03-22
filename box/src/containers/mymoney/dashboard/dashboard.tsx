@@ -6,7 +6,7 @@ import mock from '../../../mock/data.json';
 // import { FilterMessage } from "../../../components/views/index.js";
 
 
-// import AddRecordDialog from '../add_record/add_record_dialog';
+import AddRecordDialog from '../add_record/add_record_dialog';
 
 
 import './dashboard.scss'
@@ -136,10 +136,10 @@ class DashboardComp extends React.Component<IProps, IState> {
 
         return (
             <div>
-                {/*<Button type="primary" className="add-btn"*/}
-                {/*        onClick={() => this.toggleDialog(!this.state.visible)}>Primary</Button>*/}
-                {/*<AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}*/}
-                {/*                 formatMessage={formatMessage}/>*/}
+                <Button type="primary" className="add-btn"
+                        onClick={() => this.toggleDialog(!this.state.visible)}>{formatMessage({id: 'add'})}</Button>
+                <AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}
+                                 formatMessage={formatMessage}/>
                 {/*<FilterMessage/>*/}
                 <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
                        dataSource={this.dataSource} columns={columns}

@@ -18,6 +18,8 @@ export const translationMap: { [key: string]: any; } = {
         'money.dashboard.amount': '数额',
         'money.dashboard.note': '备注',
 
+        'add':'添加',
+
         'route.box.setting':'设置',
         "money.dashboard.dialog.title":'添加记录',
 
