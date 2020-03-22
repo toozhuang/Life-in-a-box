@@ -1,6 +1,9 @@
 import * as React from 'react';
 
-import {Modal, Button} from 'antd';
+import { Modal, Button } from 'antd';
+import { Input, Tooltip } from 'antd';
+import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
+
 
 
 class AddRecordDialog extends React.Component<any, any> {
@@ -42,17 +45,33 @@ class AddRecordDialog extends React.Component<any, any> {
             visible,
         } = this.props;
 
-        const {confirmLoading, ModalText} = this.state;
+        const { confirmLoading, ModalText } = this.state;
 
         return (
             <Modal
-                title={formatMessage({id: 'money.dashboard.dialog.title'})}
+                title={formatMessage({ id: 'money.dashboard.dialog.title' })}
                 visible={visible}
                 onOk={this.handleOk}
                 confirmLoading={confirmLoading}
                 onCancel={this.handleCancel}
             >
-                <p>{ModalText}</p>
+                <Input
+                    placeholder="Enter your username"
+                    prefix={<UserOutlined className="site-form-item-icon" />}
+                    suffix={
+                        <Tooltip title="Extra information">
+                            <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                        </Tooltip>
+                    }
+                />
+                <br />
+                <br />
+                <Input prefix="￥" suffix="RMB" />
+
+                <br />
+                <br />
+
+                <Input prefix="￥" suffix="RMB" disabled />
             </Modal>
         );
     }
