@@ -67,6 +67,9 @@ class DashboardComp extends React.Component<IProps, IState> {
 
     toggleDialog = (status: boolean) => {
         this.setState({visible: status});
+
+        // note: 下面采用新的方式， 动态生成组件
+        // AntModal.showModal(AddRecordDialog, {});
     };
 
     public render() {
@@ -138,8 +141,8 @@ class DashboardComp extends React.Component<IProps, IState> {
             <div>
                 <Button type="primary" className="add-btn"
                         onClick={() => this.toggleDialog(!this.state.visible)}>{formatMessage({id: 'add'})}</Button>
-                <AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}
-                                 formatMessage={formatMessage}></AddRecordDialog>
+                {/*<AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}*/}
+                {/*                 formatMessage={formatMessage}></AddRecordDialog>*/}
                 {/*<FilterMessage/>*/}
                 <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
                        dataSource={this.dataSource} columns={columns}
