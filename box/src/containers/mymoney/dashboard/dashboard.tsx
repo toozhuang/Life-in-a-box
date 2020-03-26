@@ -139,7 +139,7 @@ class DashboardComp extends React.Component<IProps, IState> {
                 <Button type="primary" className="add-btn"
                         onClick={() => this.toggleDialog(!this.state.visible)}>{formatMessage({id: 'add'})}</Button>
                 <AddRecordDialog visible={this.state.visible} toggleDialog={this.toggleDialog}
-                                 formatMessage={formatMessage}/>
+                                 formatMessage={formatMessage}></AddRecordDialog>
                 {/*<FilterMessage/>*/}
                 <Table onChange={(pagination, filters, sorter) => this.handleChange(pagination, filters, sorter)}
                        dataSource={this.dataSource} columns={columns}

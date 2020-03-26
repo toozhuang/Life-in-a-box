@@ -1,10 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { Modal, Button } from 'antd';
-import { Input, Tooltip } from 'antd';
-import { InfoCircleOutlined, UserOutlined } from '@ant-design/icons';
+import {Modal, Button} from 'antd';
+import {Input, Tooltip} from 'antd';
+import {InfoCircleOutlined, UserOutlined} from '@ant-design/icons';
 
-
+import ApolloClient from 'apollo-boost';
+import { gql } from "apollo-boost";
 
 class AddRecordDialog extends React.Component<any, any> {
     state = {
@@ -12,6 +13,28 @@ class AddRecordDialog extends React.Component<any, any> {
         visible: false,
         confirmLoading: false,
     };
+
+
+    componentDidMount() {
+        const client = new ApolloClient({
+            uri: 'http://localhost:5000/graphql',
+        });
+
+      client
+      .query({
+        query: gql`
+            {
+                tickets{
+                    user{
+                        name
+                    }
+                }
+            }
+        `
+      })
+      .then(result => console.log(result));
+
+    }
 
     showModal = () => {
         this.props.toggleDialog(
@@ -45,11 +68,11 @@ class AddRecordDialog extends React.Component<any, any> {
             visible,
         } = this.props;
 
-        const { confirmLoading, ModalText } = this.state;
+        const {confirmLoading, ModalText} = this.state;
 
         return (
             <Modal
-                title={formatMessage({ id: 'money.dashboard.dialog.title' })}
+                title={formatMessage({id: 'money.dashboard.dialog.title'})}
                 visible={visible}
                 onOk={this.handleOk}
                 confirmLoading={confirmLoading}
@@ -57,21 +80,21 @@ class AddRecordDialog extends React.Component<any, any> {
             >
                 <Input
                     placeholder="Enter your username"
-                    prefix={<UserOutlined className="site-form-item-icon" />}
+                    prefix={<UserOutlined className="site-form-item-icon"/>}
                     suffix={
                         <Tooltip title="Extra information">
-                            <InfoCircleOutlined style={{ color: 'rgba(0,0,0,.45)' }} />
+                            <InfoCircleOutlined style={{color: 'rgba(0,0,0,.45)'}}/>
                         </Tooltip>
                     }
                 />
-                <br />
-                <br />
-                <Input prefix="￥" suffix="RMB" />
+                <br/>
+                <br/>
+                <Input prefix="￥" suffix="RMB"/>
 
-                <br />
-                <br />
+                <br/>
+                <br/>
 
-                <Input prefix="￥" suffix="RMB" disabled />
+                <Input prefix="￥" suffix="RMB" disabled/>
             </Modal>
         );
     }
