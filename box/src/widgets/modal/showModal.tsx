@@ -1,6 +1,6 @@
 
 /**
- * 此方法为显示 Modal 的方法
+ * 此方法为显示 Modal 的方法 ；
  * @param Component
  * @param props
  */
