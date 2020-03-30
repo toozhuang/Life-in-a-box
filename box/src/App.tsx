@@ -17,12 +17,13 @@ import {Dashboard} from "./containers/mymoney/";
 
 
 import {AppRoutes} from "./constants/app_route";
-import {SetPanel} from "./containers/box_setting/set_panel";
+import {SettingRoute} from "./containers/box_setting";
 import CommonTopbar from "./unit/common_top_bar";
 
 
 
 import './App.scss'
+
 
 const { Sider, Content} = Layout;
 
@@ -55,7 +56,7 @@ class App extends React.Component<any, any> {
             path: AppRoutes.SETTING,
             label: this.props.intl.formatMessage({id: 'route.box.setting'}),
             icon: <ProfileOutlined/>,
-            component: SetPanel,
+            component: SettingRoute,
         }
     ];
 
