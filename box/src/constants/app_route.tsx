@@ -5,5 +5,5 @@ export const AppRoutes: any = {
 
 
 export const SettingRoutes: any = {
-    SETTING_HOME: '/setting_home'
+    SETTING_HOME: `${AppRoutes.SETTING}/setting_home`
 };
